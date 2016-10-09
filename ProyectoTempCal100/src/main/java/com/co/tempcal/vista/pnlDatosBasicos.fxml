@@ -26,10 +26,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Fecha" />
+            <Label text="Date" />
             <Label text="Serial" GridPane.rowIndex="1" />
             <Label text="Perona Que Calibra" GridPane.rowIndex="2" />
-            <Label text="Tipo Temperatura" GridPane.rowIndex="3" />
+            <Label text="Temperature Type" GridPane.rowIndex="3" />
             <TextField fx:id="txtSerial" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtPersonalCalibra" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ComboBox fx:id="cmbTipoTemperatura" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
