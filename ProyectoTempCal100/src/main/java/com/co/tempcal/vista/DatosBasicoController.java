@@ -1,5 +1,6 @@
 package com.co.tempcal.vista;
 
+import com.co.tempcal.controlador.VentanaPrincipal;
 import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.fxml.FXML;
@@ -36,6 +37,11 @@ public class DatosBasicoController {
 	
 	
     /**
+	 * Referencia al Main Principal
+	 */
+	private VentanaPrincipal mainVentana;
+    
+    /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
@@ -67,15 +73,17 @@ public class DatosBasicoController {
      */
     @FXML
     private void handleSiguiente() {
-        if (isFormValido()) {
-        	infoCalibracion.setFechaCalibracion(datePicker.getValue().toString());
-        	infoCalibracion.setSerial(txtSerial.getText());
-        	infoCalibracion.setPersonaCalibra(txtPersonalCalibra.getText());
-        	infoCalibracion.setTipoTemperatura(cmbTipoTemperatura.getValue());
+       // if (isFormValido()) {
+       // 	infoCalibracion.setFechaCalibracion(datePicker.getValue().toString());
+        //	infoCalibracion.setSerial(txtSerial.getText());
+        //	infoCalibracion.setPersonaCalibra(txtPersonalCalibra.getText());
+        //	infoCalibracion.setTipoTemperatura(cmbTipoTemperatura.getValue());
 
             isSiguienteClicked = true;
-            dialogStage.close();
-        }
+            
+           mainVentana.mostrarPanelDatosTemperatura(this.dialogStage);
+           
+      //  }
     }
     
     /**
@@ -114,5 +122,15 @@ public class DatosBasicoController {
             return false;
         }
     }
+    
+
+	 /**
+    * Is called by the main application to give a reference back to itself.
+    * 
+    * @param mainApp
+    */
+   public void setMainApp(VentanaPrincipal mainApp) {
+       this.mainVentana = mainApp;
+   }
     
 }

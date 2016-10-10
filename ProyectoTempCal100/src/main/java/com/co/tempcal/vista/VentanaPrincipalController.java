@@ -4,6 +4,7 @@ import com.co.tempcal.controlador.VentanaPrincipal;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.effect.Reflection;
 
 public class VentanaPrincipalController {
 
@@ -29,6 +30,8 @@ public class VentanaPrincipalController {
 	 * 
 	 */
 	private void initialize(){
+		
+		 btnNuevoProceso.setEffect(new Reflection());
 	}
 	
 	/**
@@ -37,7 +40,7 @@ public class VentanaPrincipalController {
 	@FXML
 	private void controladorBtnNuevo() {
 		
-		boolean isSiguienteClicked = mainVentana.MostrarPanelDatosBasicos();
+		boolean isSiguienteClicked = mainVentana.mostrarPanelDatosBasicos();
 	    if (isSiguienteClicked) {
 	    }
 		

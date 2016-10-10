@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.co.tempcal.vista.DatosTemperaturaController">
+   <children>
+      <Label layoutX="77.0" layoutY="97.0" text="Cold Bath Temp (TBC1) " />
+      <Label layoutX="80.0" layoutY="168.0" text="Hot uncalib Sensor Temp (TPH1)" />
+      <TextField fx:id="txtColdBathTemp" layoutX="270.0" layoutY="93.0" />
+      <TextField fx:id="txtHotUncalibSensorTemp" layoutX="270.0" layoutY="164.0" />
+      <Separator layoutY="218.0" prefHeight="17.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="218.0" />
+      <Label layoutX="80.0" layoutY="290.0" text="Hot Calib Sensor (TPH2)" />
+      <TextField fx:id="txtHotCalibSensorTemp" layoutX="270.0" layoutY="286.0" />
+      <HBox layoutX="140.0" layoutY="336.0" />
+      <Button fx:id="btnCancel" layoutX="400.0" layoutY="341.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Cancelar" />
+      <Button fx:id="btnSiguiente" layoutX="270.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleSiguiente" prefHeight="25.0" prefWidth="130.0" text="Siguiente" />
+      <Label layoutX="185.0" layoutY="41.0" text="Please wait meanwhile the bath " />
+   </children>
+</AnchorPane>
