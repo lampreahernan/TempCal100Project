@@ -1,43 +1,44 @@
 package com.co.tempcal.vista;
 
 import com.co.tempcal.controlador.VentanaPrincipal;
-import com.co.tempcal.modelo.CertificadoDTO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class GenerarCertificadoController {
+public class DatosTemperaturaController {
 
 	@FXML
-	private TextField txtOwner;
+	private Button btnSiguiente;
 
 	@FXML
-	private TextField txtCertificateNumber;
+	private Button btnCancel;
 
 	@FXML
-	private TextField txtMachineModel;
+	private TextField txtColdBathTemp;
 
 	@FXML
-	private Button btnGuardarCertificado;
+	private TextField txtHotUncalibSensorTemp;
+
+	@FXML
+	private TextField txtHotCalibSensorTemp;
+
+	private Stage dialogStage;
 
 	/**
 	 * Referencia al Main Principal
 	 */
 	private VentanaPrincipal mainVentana;
-
-	private Stage dialogStage;
-	private CertificadoDTO infoCertificado;
-
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
-	@FXML
-	private void initialize() {
-	}
-
+	
+	 /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+    @FXML
+    private void initialize() {
+    }
+	
 	/**
 	 * Setea el stage para el dialogo
 	 * 
@@ -48,20 +49,19 @@ public class GenerarCertificadoController {
 	}
 
 	/**
-	 * Llamado cuando el boton siguiente es precionado
-	 */
-	@FXML
-	private void handleGuardar() {
-
-	}
-
-	/**
 	 * Is called by the main application to give a reference back to itself.
 	 * 
 	 * @param mainApp
 	 */
 	public void setMainApp(VentanaPrincipal mainApp) {
 		this.mainVentana = mainApp;
+	}
+
+	@FXML
+	private void handleSiguiente() {
+
+		mainVentana.mostrarPanelResultado(dialogStage);
+
 	}
 
 }

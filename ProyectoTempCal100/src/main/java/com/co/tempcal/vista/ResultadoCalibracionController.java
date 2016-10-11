@@ -1,5 +1,6 @@
 package com.co.tempcal.vista;
 
+import com.co.tempcal.controlador.VentanaPrincipal;
 import com.co.tempcal.modelo.CertificadoDTO;
 
 import javafx.fxml.FXML;
@@ -56,6 +57,11 @@ public class ResultadoCalibracionController {
 	 * 
 	 */
 	private Stage dialogStage;
+
+    /**
+	 * Referencia al Main Principal
+	 */
+	private VentanaPrincipal mainVentana;
 	
 	/**
 	 * 
@@ -85,7 +91,7 @@ public class ResultadoCalibracionController {
      */
     @FXML
     private void handleGenerar() {
-        
+    	mainVentana.mostrarPanelGenerarCertificado(dialogStage);
     }
     
     /**
@@ -96,5 +102,13 @@ public class ResultadoCalibracionController {
         
     }
     
+    /**
+     * Is called by the main application to give a reference back to itself.
+     * 
+     * @param mainApp
+     */
+    public void setMainApp(VentanaPrincipal mainApp) {
+        this.mainVentana = mainApp;
+    }
     
 }
