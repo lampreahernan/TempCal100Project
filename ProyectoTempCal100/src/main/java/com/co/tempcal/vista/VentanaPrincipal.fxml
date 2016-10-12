@@ -14,8 +14,8 @@
                <children>
                   <VBox layoutX="6.0" prefHeight="398.0" prefWidth="112.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="btnNuevoProceso" mnemonicParsing="false" onAction="#controladorBtnNuevo" prefHeight="32.0" prefWidth="125.0" text="Nueva Calibracion" />
-                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="126.0" text="Salir" />
+                        <Button fx:id="btnNuevoProceso" mnemonicParsing="false" onAction="#controladorBtnNuevo" prefHeight="32.0" prefWidth="125.0" text="New Process" />
+                        <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="126.0" text="Exit" />
                      </children>
                   </VBox>
                </children>

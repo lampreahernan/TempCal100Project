@@ -28,7 +28,7 @@
          <children>
             <Label text="Date" />
             <Label text="Serial" GridPane.rowIndex="1" />
-            <Label text="Perona Que Calibra" GridPane.rowIndex="2" />
+            <Label text="Calib. By" GridPane.rowIndex="2" />
             <Label text="Temperature Type" GridPane.rowIndex="3" />
             <TextField fx:id="txtSerial" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtPersonalCalibra" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -38,8 +38,8 @@
       </GridPane>
       <HBox layoutX="70.0" layoutY="229.0">
          <children>
-            <Button fx:id="btnSiguiente" mnemonicParsing="false" onAction="#handleSiguiente" prefHeight="25.0" prefWidth="128.0" text="Siguiente" />
-            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#handleCancelar" prefHeight="25.0" prefWidth="134.0" text="Cancelar" />
+            <Button fx:id="btnSiguiente" mnemonicParsing="false" onAction="#handleSiguiente" prefHeight="25.0" prefWidth="128.0" text="Next" />
+            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#handleCancelar" prefHeight="25.0" prefWidth="134.0" text="Cancel" />
          </children>
       </HBox>
    </children>
