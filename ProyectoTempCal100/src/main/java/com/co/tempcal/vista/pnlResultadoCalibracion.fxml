@@ -28,7 +28,7 @@
             <Label text="Serial" GridPane.rowIndex="1"/>
             <Label text="Calib. By" GridPane.rowIndex="2"/>
             <Label text="Temp Calib. Type" GridPane.rowIndex="3"/>
-            <TextField fx:id="txtDate" GridPane.columnIndex="1"  disable="true"/>
+            <TextField fx:id="txtDate" GridPane.columnIndex="1" editable="false"/>
             <TextField fx:id="txtSerial" GridPane.columnIndex="1" GridPane.rowIndex="1"  disable="true"/>
             <TextField fx:id="txtCalibBy" GridPane.columnIndex="1" GridPane.rowIndex="2"  disable="true"/>
             <TextField fx:id="txtTypeTemp" GridPane.columnIndex="1" GridPane.rowIndex="3"  disable="true"/>

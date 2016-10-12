@@ -1,6 +1,7 @@
 package com.co.tempcal.vista;
 
 import com.co.tempcal.controlador.VentanaPrincipal;
+import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,6 +32,11 @@ public class DatosTemperaturaController {
 	 */
 	private VentanaPrincipal mainVentana;
 	
+	/**
+	 * DTO sobre el proceso
+	 */
+	private InformacionCalibracionDTO infoCalibracion;
+	
 	 /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -44,8 +50,9 @@ public class DatosTemperaturaController {
 	 * 
 	 * @param dialogStage
 	 */
-	public void setDialogStage(Stage dialogStage) {
+	public void setDialogStage(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
 		this.dialogStage = dialogStage;
+		this.infoCalibracion= infoCalibracion;
 	}
 
 	/**
@@ -60,7 +67,7 @@ public class DatosTemperaturaController {
 	@FXML
 	private void handleSiguiente() {
 
-		mainVentana.mostrarPanelResultado(dialogStage);
+		mainVentana.mostrarPanelResultado(dialogStage, infoCalibracion);
 
 	}
 

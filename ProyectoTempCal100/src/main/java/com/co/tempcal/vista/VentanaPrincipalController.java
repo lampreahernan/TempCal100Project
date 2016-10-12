@@ -40,10 +40,7 @@ public class VentanaPrincipalController {
 	@FXML
 	private void controladorBtnNuevo() {
 		
-		boolean isSiguienteClicked = mainVentana.mostrarPanelDatosBasicos();
-	    if (isSiguienteClicked) {
-	    }
-		
+		mainVentana.mostrarPanelDatosBasicos();
 	}
 	
 	

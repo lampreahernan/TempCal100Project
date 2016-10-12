@@ -2,6 +2,7 @@ package com.co.tempcal.vista;
 
 import com.co.tempcal.controlador.VentanaPrincipal;
 import com.co.tempcal.modelo.CertificadoDTO;
+import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,6 +27,11 @@ public class GenerarCertificadoController {
 	 * Referencia al Main Principal
 	 */
 	private VentanaPrincipal mainVentana;
+	
+	/**
+	 * DTO sobre el proceso
+	 */
+	private InformacionCalibracionDTO infoCalibracion;
 
 	private Stage dialogStage;
 	private CertificadoDTO infoCertificado;
@@ -43,8 +49,9 @@ public class GenerarCertificadoController {
 	 * 
 	 * @param dialogStage
 	 */
-	public void setDialogStage(Stage dialogStage) {
+	public void setDialogStage(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
 		this.dialogStage = dialogStage;
+		this.infoCalibracion = infoCalibracion;
 	}
 
 	/**

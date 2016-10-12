@@ -3,20 +3,21 @@ package com.co.tempcal.modelo;
 public class CertificadoDTO {
 	
 	/**
-	 * 
+	 * Propietario de la Maquina
 	 */
 	private String owner;
 	
 	/**
-	 * 
+	 * Numero del Certificado
 	 */
 	private String certificateNumber;
 	
 	/**
-	 * 
+	 * Modelo de la Maquina
 	 */
 	private String machineModel;
 
+	
 	public String getOwner() {
 		return owner;
 	}
