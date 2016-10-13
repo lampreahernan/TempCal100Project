@@ -81,7 +81,8 @@ public class DatosBasicoController {
 		infoCalibracion = new InformacionCalibracionDTO();
 		
 		cmbTipoTemperatura.getItems().addAll("C", "F");
-		cmbTipoTemperatura.setValue("C");
+		cmbTipoTemperatura.setValue("C");	
+		
 	}
 
 	/**
@@ -126,13 +127,13 @@ public class DatosBasicoController {
 		String errorMessage = "";
 
 		if (datePicker.getValue() == null || datePicker.getValue().toString().length() == 0) {
-			errorMessage += "Please, Select a Date \n";
+			errorMessage += "Select a Date \n";
 		}
 		if (txtSerial.getText() == null || txtSerial.getText().length() == 0) {
-			errorMessage += "Please, Set a Serial \n";
+			errorMessage += "Set a Serial \n";
 		}
 		if (txtPersonalCalibra.getText() == null || txtPersonalCalibra.getText().length() == 0) {
-			errorMessage += "Please, Set the person who will performed process \n";
+			errorMessage += "Set the person who will performed process \n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;

@@ -15,6 +15,9 @@ public class DatosTemperaturaController {
 
 	@FXML
 	private Button btnCancel;
+	
+	@FXML
+	private Button btnCalcular;
 
 	@FXML
 	private TextField txtColdBathTemp;
@@ -24,7 +27,10 @@ public class DatosTemperaturaController {
 
 	@FXML
 	private TextField txtHotCalibSensorTemp;
-
+	
+	/**
+	 * 
+	 */
 	private Stage dialogStage;
 
 	/**
@@ -66,8 +72,11 @@ public class DatosTemperaturaController {
 
 	@FXML
 	private void handleSiguiente() {
-
 		mainVentana.mostrarPanelResultado(dialogStage, infoCalibracion);
+	}
+	
+	@FXML
+	private void handleCalcular() {
 
 	}
 
