@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import com.co.tempcal.controlador.VentanaPrincipal;
+import com.co.tempcal.modelo.CertificadoDTO;
 import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.collections.FXCollections;
@@ -43,6 +44,24 @@ public class DatosBasicoController {
 	 */
 	@FXML
 	private ComboBox<String> cmbTipoTemperatura;
+	
+	/**
+	 * Dueño de la Maquina
+	 */
+	@FXML
+	private TextField txtOwner;
+
+	/**
+	 * Numero del Certificado
+	 */
+	@FXML
+	private TextField txtCertificateNumber;
+
+	/**
+	 * Modelo de la Maquina
+	 */
+	@FXML
+	private TextField txtMachineModel;
 
 	/**
 	 * Boton Siguiente
@@ -67,10 +86,16 @@ public class DatosBasicoController {
 	private InformacionCalibracionDTO infoCalibracion;
 
 	/**
+	 * DTO con la informacion del Certificado
+	 */
+	private CertificadoDTO infoCertificado;
+	
+	/**
 	 * Referencia al Main Principal
 	 */
 	private VentanaPrincipal mainVentana;
 
+	
 	
 	@FXML
 	private void initialize() {
@@ -79,6 +104,7 @@ public class DatosBasicoController {
 		Locale.setDefault(Locale.ENGLISH);
 		
 		infoCalibracion = new InformacionCalibracionDTO();
+		infoCertificado = new CertificadoDTO();
 		
 		cmbTipoTemperatura.getItems().addAll("C", "F");
 		cmbTipoTemperatura.setValue("C");	
@@ -104,8 +130,12 @@ public class DatosBasicoController {
 			infoCalibracion.setSerial(txtSerial.getText());
 			infoCalibracion.setCalibrationPerson(txtPersonalCalibra.getText());
 			infoCalibracion.setTemperatureType(cmbTipoTemperatura.getValue());
+			
+			infoCertificado.setOwner(txtOwner.getText());
+			infoCertificado.setOwner(txtMachineModel.getText());
+			infoCertificado.setOwner(txtCertificateNumber.getText());
 
-			mainVentana.mostrarPanelDatosTemperatura(this.dialogStage, infoCalibracion);
+			mainVentana.mostrarColdBathPanel(this.dialogStage, infoCalibracion);
 
 		}
 	}
@@ -125,7 +155,7 @@ public class DatosBasicoController {
 	 */
 	private boolean isFormValido() {
 		String errorMessage = "";
-
+		
 		if (datePicker.getValue() == null || datePicker.getValue().toString().length() == 0) {
 			errorMessage += "Select a Date \n";
 		}
@@ -134,6 +164,15 @@ public class DatosBasicoController {
 		}
 		if (txtPersonalCalibra.getText() == null || txtPersonalCalibra.getText().length() == 0) {
 			errorMessage += "Set the person who will performed process \n";
+		}
+		if (txtOwner.getText() == null || txtOwner.getText().length() == 0) {
+			errorMessage += "Set the owner \n";
+		}
+		if (txtCertificateNumber.getText() == null || txtCertificateNumber.getText().length() == 0) {
+			errorMessage += "Set the Certificate Number \n";
+		}
+		if (txtMachineModel.getText() == null || txtMachineModel.getText().length() == 0) {
+			errorMessage += "Set the Machine Model \n";
 		}
 		if (errorMessage.length() == 0) {
 			return true;

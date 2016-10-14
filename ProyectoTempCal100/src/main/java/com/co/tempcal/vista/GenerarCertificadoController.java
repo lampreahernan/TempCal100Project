@@ -11,14 +11,7 @@ import javafx.stage.Stage;
 
 public class GenerarCertificadoController {
 
-	@FXML
-	private TextField txtOwner;
-
-	@FXML
-	private TextField txtCertificateNumber;
-
-	@FXML
-	private TextField txtMachineModel;
+	
 
 	@FXML
 	private Button btnGuardarCertificado;
@@ -34,7 +27,7 @@ public class GenerarCertificadoController {
 	private InformacionCalibracionDTO infoCalibracion;
 
 	private Stage dialogStage;
-	private CertificadoDTO infoCertificado;
+	
 
 	/**
 	 * Initializes the controller class. This method is automatically called

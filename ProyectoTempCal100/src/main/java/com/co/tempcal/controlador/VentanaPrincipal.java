@@ -138,6 +138,56 @@ public class VentanaPrincipal extends Application {
 	}
 	
 	/**
+	*  Carga para solicitar el Cold Bath
+	*/
+	public void mostrarColdBathPanel(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VentanaPrincipal.class.getClassLoader()
+					.getResource("com/co/tempcal/vista/pnlDataColdBath.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Proceso #" + infoCalibracion.getSerial());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			DatosTemperaturaController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	*  Carga para solicitar el Cold Bath
+	*/
+	public void mostrarHotSensorPanel(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VentanaPrincipal.class.getClassLoader()
+					.getResource("com/co/tempcal/vista/pnlDataHotSensor.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Proceso #" + infoCalibracion.getSerial());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			DatosTemperaturaController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * Carga del Panel con los datos de la temperatura
 	 * @param dialogStage 
 	 */

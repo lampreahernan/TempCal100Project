@@ -4,8 +4,10 @@ import com.co.tempcal.controlador.VentanaPrincipal;
 import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class DatosTemperaturaController {
@@ -72,12 +74,18 @@ public class DatosTemperaturaController {
 
 	@FXML
 	private void handleSiguiente() {
-		mainVentana.mostrarPanelResultado(dialogStage, infoCalibracion);
+		mainVentana.mostrarHotSensorPanel(dialogStage, infoCalibracion);
 	}
 	
 	@FXML
 	private void handleCalcular() {
-
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Result Process");
+		alert.setHeaderText("PROCESS PASS");
+		alert.setContentText("TPH2 es :");
+		alert.showAndWait();
+		
+		mainVentana.mostrarPanelResultado(dialogStage, infoCalibracion);
 	}
 
 }
