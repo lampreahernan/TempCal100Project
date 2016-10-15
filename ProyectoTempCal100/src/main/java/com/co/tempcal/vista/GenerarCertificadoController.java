@@ -2,6 +2,7 @@ package com.co.tempcal.vista;
 
 import com.co.tempcal.controlador.VentanaPrincipal;
 import com.co.tempcal.modelo.CertificadoDTO;
+import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,14 +11,7 @@ import javafx.stage.Stage;
 
 public class GenerarCertificadoController {
 
-	@FXML
-	private TextField txtOwner;
-
-	@FXML
-	private TextField txtCertificateNumber;
-
-	@FXML
-	private TextField txtMachineModel;
+	
 
 	@FXML
 	private Button btnGuardarCertificado;
@@ -26,9 +20,14 @@ public class GenerarCertificadoController {
 	 * Referencia al Main Principal
 	 */
 	private VentanaPrincipal mainVentana;
+	
+	/**
+	 * DTO sobre el proceso
+	 */
+	private InformacionCalibracionDTO infoCalibracion;
 
 	private Stage dialogStage;
-	private CertificadoDTO infoCertificado;
+	
 
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -43,8 +42,9 @@ public class GenerarCertificadoController {
 	 * 
 	 * @param dialogStage
 	 */
-	public void setDialogStage(Stage dialogStage) {
+	public void setDialogStage(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
 		this.dialogStage = dialogStage;
+		this.infoCalibracion = infoCalibracion;
 	}
 
 	/**

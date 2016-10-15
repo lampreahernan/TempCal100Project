@@ -1,7 +1,9 @@
 package com.co.tempcal.controlador;
 
 import java.io.IOException;
+import java.net.URL;
 
+import com.co.tempcal.modelo.InformacionCalibracionDTO;
 import com.co.tempcal.vista.DatosBasicoController;
 import com.co.tempcal.vista.DatosTemperaturaController;
 import com.co.tempcal.vista.GenerarCertificadoController;
@@ -19,7 +21,14 @@ import javafx.stage.Stage;
 
 public class VentanaPrincipal extends Application {
 
+	/**
+	 * 
+	 */
 	private Stage stgVistaPrincipal;
+	
+	/**
+	 * 
+	 */
 	private BorderPane pnlVistaPrincipal;
 	
 	@Override
@@ -32,153 +41,213 @@ public class VentanaPrincipal extends Application {
 
 		mostrarVentanaPrincipal();
 	}
-	
+
 	/**
-     * 
-     */
-    public void inicializarVentanaPrincipal() {
-        try {
-            
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(VentanaPrincipal.class.getResource("../vista/RootLayout.fxml"));
-            pnlVistaPrincipal = (BorderPane) loader.load();
+	 * Carga de los componentes iniciales
+	 */
+	public void inicializarVentanaPrincipal() {
+		try {
 
-            Scene scene = new Scene(pnlVistaPrincipal);
-            stgVistaPrincipal.setScene(scene);
-            stgVistaPrincipal.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(
+					VentanaPrincipal.class.getClassLoader().getResource("com/co/tempcal/vista/RootLayout.fxml"));
+			pnlVistaPrincipal = (BorderPane) loader.load();
 
-   /**
-    * 
-    */
-    public void mostrarVentanaPrincipal() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(VentanaPrincipal.class.getResource("../vista/VentanaPrincipal.fxml"));
-            AnchorPane pnlPrincipal = (AnchorPane) loader.load();    
-            
-            VentanaPrincipalController controller = loader.getController();
-            controller.setMainApp(this);
-            
-            pnlVistaPrincipal.setCenter(pnlPrincipal);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public boolean mostrarPanelDatosBasicos() {
-        try {
-        	
-        	// Create the dialog Stage.
-            Stage dialogStage = new Stage();
-        	
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(VentanaPrincipal.class.getResource("../vista/pnlDatosBasicos.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            
-            dialogStage.getIcons().add(new Image("images/icon.png"));
-            dialogStage.setTitle("Datos Basicos");
-            dialogStage.initOwner(stgVistaPrincipal);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-            
-            // Set the person into the controller.
-            DatosBasicoController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setMainApp(this);
+			Scene scene = new Scene(pnlVistaPrincipal);
+			stgVistaPrincipal.setScene(scene);
+			stgVistaPrincipal.show();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-            // Show the dialog and wait until the user closes it
-            //dialogStage.showAndWait();
-            dialogStage.show();
-            
-            
-            return controller.isSiguienteClicked();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-    public void mostrarPanelResultado(Stage dialogStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(VentanaPrincipal.class.getResource("../vista/pnlResultadoCalibracion.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-    
-            dialogStage.setTitle("Resultado");
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+	/**
+	*  Carga del Panel principal
+	*/
+	public void mostrarVentanaPrincipal() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(
+					VentanaPrincipal.class.getClassLoader().getResource("com/co/tempcal/vista/VentanaPrincipal.fxml"));
+			AnchorPane pnlPrincipal = (AnchorPane) loader.load();
 
-            ResultadoCalibracionController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setMainApp(this);
-            
-            dialogStage.show();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void mostrarPanelDatosTemperatura(Stage dialogStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(VentanaPrincipal.class.getResource("../vista/pnlDatosTemperatura.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-    
-            dialogStage.setTitle("Datos Temperatura");
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
+			VentanaPrincipalController controller = loader.getController();
+			controller.setMainApp(this);
 
-            DatosTemperaturaController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setMainApp(this);
-            
-            dialogStage.show();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    
-    public void mostrarPanelGenerarCertificado(Stage dialogStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(VentanaPrincipal.class.getResource("../vista/pnlGenerarCertificado.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-    
-            dialogStage.setTitle("Generar Certificado");
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-            
-            GenerarCertificadoController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setMainApp(this);
-            
-            dialogStage.show();
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * 
-     * @return
-     */
-    public Stage getVistaPrincipal() {
-        return stgVistaPrincipal;
-    }
+			pnlVistaPrincipal.setCenter(pnlPrincipal);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	/**
-	 * 
+	*  Carga del Panel con la informacion Basica
+	*/
+	public void mostrarPanelDatosBasicos() {
+		try {
+
+			Stage dialogStage = new Stage();
+
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(
+					VentanaPrincipal.class.getClassLoader().getResource("com/co/tempcal/vista/pnlDatosBasicos.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.getIcons().add(new Image("images/icon.png"));
+			dialogStage.setTitle("Basic Information");
+			dialogStage.initOwner(stgVistaPrincipal);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			DatosBasicoController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	*  Carga del Panel con el resultado del proceso
+	*/
+	public void mostrarPanelResultado(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VentanaPrincipal.class.getClassLoader()
+					.getResource("com/co/tempcal/vista/pnlResultadoCalibracion.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Result Process");
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			ResultadoCalibracionController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	*  Carga para solicitar el Cold Bath
+	*/
+	public void mostrarColdBathPanel(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VentanaPrincipal.class.getClassLoader()
+					.getResource("com/co/tempcal/vista/pnlDataColdBath.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Proceso #" + infoCalibracion.getSerial());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			DatosTemperaturaController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	*  Carga para solicitar el Cold Bath
+	*/
+	public void mostrarHotSensorPanel(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VentanaPrincipal.class.getClassLoader()
+					.getResource("com/co/tempcal/vista/pnlDataHotSensor.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Proceso #" + infoCalibracion.getSerial());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			DatosTemperaturaController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Carga del Panel con los datos de la temperatura
+	 * @param dialogStage 
+	 */
+	public void mostrarPanelDatosTemperatura(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VentanaPrincipal.class.getClassLoader()
+					.getResource("com/co/tempcal/vista/pnlDatosTemperatura.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Temperature Information");
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			DatosTemperaturaController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	*  Carga del Panel para generar el certificado del proceso
+	*/
+	public void mostrarPanelGenerarCertificado(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(VentanaPrincipal.class.getClassLoader()
+					.getResource("com/co/tempcal/vista/pnlGenerarCertificado.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Generate Certificate");
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			GenerarCertificadoController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Retorna la vista principal
+	 * @return
+	 */
+	public Stage getVistaPrincipal() {
+		return stgVistaPrincipal;
+	}
+
+	/**
+	 * Main de la Aplicacion
 	 * @param args
 	 */
 	public static void main(String[] args) {

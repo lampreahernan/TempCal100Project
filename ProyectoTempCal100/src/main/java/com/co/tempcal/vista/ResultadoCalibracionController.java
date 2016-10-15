@@ -2,6 +2,7 @@ package com.co.tempcal.vista;
 
 import com.co.tempcal.controlador.VentanaPrincipal;
 import com.co.tempcal.modelo.CertificadoDTO;
+import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,9 +65,9 @@ public class ResultadoCalibracionController {
 	private VentanaPrincipal mainVentana;
 	
 	/**
-	 * 
+	 * DTO sobre el proceso
 	 */
-    private CertificadoDTO infoCertificado;
+	private InformacionCalibracionDTO infoCalibracion;
     
     /**
      * Initializes the controller class. This method is automatically called
@@ -81,17 +82,27 @@ public class ResultadoCalibracionController {
      * 
      * @param dialogStage
      */
-    public void setDialogStage(Stage dialogStage) {
+    public void setDialogStage(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
         this.dialogStage = dialogStage;
+        this.infoCalibracion=infoCalibracion;
+        
+        cargarDatos(infoCalibracion);
+        
     }
     
     
-    /**
+    private void cargarDatos(InformacionCalibracionDTO infoCalibracion) {
+		
+    	txtDate.setText(infoCalibracion.getCalibrationDate());
+		
+	}
+
+	/**
      * Llamado cuando el boton siguiente es precionado
      */
     @FXML
     private void handleGenerar() {
-    	mainVentana.mostrarPanelGenerarCertificado(dialogStage);
+    	mainVentana.mostrarPanelGenerarCertificado(dialogStage, infoCalibracion);
     }
     
     /**

@@ -30,6 +30,6 @@
             <TextField fx:id="txtMachineModel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="btnGuardarCertificado" layoutX="223.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleGuardar" prefHeight="35.0" prefWidth="156.0" text="Guardar Certificado" />
+      <Button fx:id="btnGuardarCertificado" layoutX="223.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleGuardar" prefHeight="35.0" prefWidth="156.0" text="Save Certificate" />
    </children>
 </AnchorPane>

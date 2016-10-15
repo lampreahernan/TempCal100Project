@@ -1,10 +1,13 @@
 package com.co.tempcal.vista;
 
 import com.co.tempcal.controlador.VentanaPrincipal;
+import com.co.tempcal.modelo.InformacionCalibracionDTO;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class DatosTemperaturaController {
@@ -14,6 +17,9 @@ public class DatosTemperaturaController {
 
 	@FXML
 	private Button btnCancel;
+	
+	@FXML
+	private Button btnCalcular;
 
 	@FXML
 	private TextField txtColdBathTemp;
@@ -23,13 +29,21 @@ public class DatosTemperaturaController {
 
 	@FXML
 	private TextField txtHotCalibSensorTemp;
-
+	
+	/**
+	 * 
+	 */
 	private Stage dialogStage;
 
 	/**
 	 * Referencia al Main Principal
 	 */
 	private VentanaPrincipal mainVentana;
+	
+	/**
+	 * DTO sobre el proceso
+	 */
+	private InformacionCalibracionDTO infoCalibracion;
 	
 	 /**
      * Initializes the controller class. This method is automatically called
@@ -44,8 +58,9 @@ public class DatosTemperaturaController {
 	 * 
 	 * @param dialogStage
 	 */
-	public void setDialogStage(Stage dialogStage) {
+	public void setDialogStage(Stage dialogStage, InformacionCalibracionDTO infoCalibracion) {
 		this.dialogStage = dialogStage;
+		this.infoCalibracion= infoCalibracion;
 	}
 
 	/**
@@ -59,9 +74,18 @@ public class DatosTemperaturaController {
 
 	@FXML
 	private void handleSiguiente() {
-
-		mainVentana.mostrarPanelResultado(dialogStage);
-
+		mainVentana.mostrarHotSensorPanel(dialogStage, infoCalibracion);
+	}
+	
+	@FXML
+	private void handleCalcular() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Result Process");
+		alert.setHeaderText("PROCESS PASS");
+		alert.setContentText("TPH2 es :");
+		alert.showAndWait();
+		
+		mainVentana.mostrarPanelResultado(dialogStage, infoCalibracion);
 	}
 
 }

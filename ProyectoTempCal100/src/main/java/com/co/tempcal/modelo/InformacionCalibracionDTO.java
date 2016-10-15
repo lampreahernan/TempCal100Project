@@ -2,11 +2,14 @@ package com.co.tempcal.modelo;
 
 public class InformacionCalibracionDTO {
 	
-	private String fechaCalibracion;
+	/**
+	 * 
+	 */
+	private String calibrationDate;
 	
-	private String tipoTemperatura;
+	private String temperatureType;
 	
-	private String personaCalibra;
+	private String calibrationPerson;
 	
 	private String serial;
 	
@@ -20,28 +23,28 @@ public class InformacionCalibracionDTO {
 	
 	private String hotSensorTemp2;
 
-	public String getFechaCalibracion() {
-		return fechaCalibracion;
+	public String getCalibrationDate() {
+		return calibrationDate;
 	}
 
-	public void setFechaCalibracion(String fechaCalibracion) {
-		this.fechaCalibracion = fechaCalibracion;
+	public void setCalibrationDate(String calibrationDate) {
+		this.calibrationDate = calibrationDate;
 	}
 
-	public String getTipoTemperatura() {
-		return tipoTemperatura;
+	public String getTemperatureType() {
+		return temperatureType;
 	}
 
-	public void setTipoTemperatura(String tipoTemperatura) {
-		this.tipoTemperatura = tipoTemperatura;
+	public void setTemperatureType(String temperatureType) {
+		this.temperatureType = temperatureType;
 	}
 
-	public String getPersonaCalibra() {
-		return personaCalibra;
+	public String getCalibrationPerson() {
+		return calibrationPerson;
 	}
 
-	public void setPersonaCalibra(String personaCalibra) {
-		this.personaCalibra = personaCalibra;
+	public void setCalibrationPerson(String calibrationPerson) {
+		this.calibrationPerson = calibrationPerson;
 	}
 
 	public String getSerial() {
@@ -90,8 +93,6 @@ public class InformacionCalibracionDTO {
 
 	public void setHotSensorTemp2(String hotSensorTemp2) {
 		this.hotSensorTemp2 = hotSensorTemp2;
-	}	
-	
-	
-	
+	}
+
 }

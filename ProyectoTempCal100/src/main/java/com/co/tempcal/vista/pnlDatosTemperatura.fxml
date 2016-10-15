@@ -6,19 +6,38 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.co.tempcal.vista.DatosTemperaturaController">
    <children>
-      <Label layoutX="77.0" layoutY="97.0" text="Cold Bath Temp (TBC1) " />
-      <Label layoutX="80.0" layoutY="168.0" text="Hot uncalib Sensor Temp (TPH1)" />
-      <TextField fx:id="txtColdBathTemp" layoutX="270.0" layoutY="93.0" />
-      <TextField fx:id="txtHotUncalibSensorTemp" layoutX="270.0" layoutY="164.0" />
-      <Separator layoutY="218.0" prefHeight="17.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="218.0" />
-      <Label layoutX="80.0" layoutY="290.0" text="Hot Calib Sensor (TPH2)" />
-      <TextField fx:id="txtHotCalibSensorTemp" layoutX="270.0" layoutY="286.0" />
+      <HBox layoutX="163.0" layoutY="67.0">
+         <children>
+            <Label text="Cold Bath Temp (TBC1) " />
+            <TextField fx:id="txtColdBathTemp" />
+         </children>
+      </HBox>
+      <HBox layoutX="138.0" layoutY="175.0">
+         <children>
+            <Label text="Hot uncalib Sensor Temp (TPH1) " />
+            <TextField fx:id="txtHotUncalibSensorTemp" />
+         </children>
+      </HBox>
+      <Separator layoutX="1.0" layoutY="256.0" prefHeight="17.0" prefWidth="600.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="256.0" />
+      <VBox layoutX="226.0" layoutY="281.0">
+         <children>
+            <Label text="Hot Calib Sensor (TPH2)" />
+            <TextField fx:id="txtHotCalibSensorTemp" editable="false" />
+         </children>
+      </VBox>
       <HBox layoutX="140.0" layoutY="336.0" />
-      <Button fx:id="btnCancel" layoutX="400.0" layoutY="341.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Cancelar" />
-      <Button fx:id="btnSiguiente" layoutX="270.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleSiguiente" prefHeight="25.0" prefWidth="130.0" text="Siguiente" />
-      <Label layoutX="185.0" layoutY="41.0" text="Please wait meanwhile the bath " />
+      <HBox layoutX="170.0" layoutY="344.0">
+         <children>
+            <Button fx:id="btnSiguiente" mnemonicParsing="false" onAction="#handleSiguiente" prefHeight="25.0" prefWidth="130.0" text="Next" />
+            <Button fx:id="btnCancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Cancel" />
+         </children>
+      </HBox>
+      <Label layoutX="69.0" layoutY="31.0" text="Please put the Soak Sensor in the Cold Bath and wait while the temperature is stabilized" />
+      <Label layoutX="75.0" layoutY="127.0" text="Now, put the Soak Sensor in the Hot Bath and wait while the temperature is stabilized" />
+      <Button fx:id="btnCalcular" layoutX="254.0" layoutY="215.0" mnemonicParsing="false" onAction="#handleCalcular" text="Calcular Factor" />
    </children>
 </AnchorPane>
