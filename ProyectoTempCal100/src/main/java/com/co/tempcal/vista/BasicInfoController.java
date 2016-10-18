@@ -1,17 +1,13 @@
 package com.co.tempcal.vista;
 
 import java.util.Locale;
-import java.util.TimeZone;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.co.tempcal.controlador.MainGUI;
 import com.co.tempcal.modelo.CertificateDTO;
+import com.co.tempcal.modelo.Validations;
 import com.co.tempcal.modelo.CalibrationInformationDTO;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -94,7 +90,6 @@ public class BasicInfoController {
 	 */
 	private MainGUI mainGUI;
 
-
 	@FXML
 	private void initialize() {
 		
@@ -155,7 +150,7 @@ public class BasicInfoController {
 		if (txtSerial.getText() == null || txtSerial.getText().length() == 0) {
 			errorMessage += "Set a Serial \n";
 		}else{
-			if (!validatedNumber(txtSerial.getText())) {
+			if (!Validations.validatedNumber(txtSerial.getText())) {
 				errorMessage += "Only a numbers in the Serial field \n";
 			}
 		}
@@ -168,34 +163,24 @@ public class BasicInfoController {
 		if (txtCertificateNumber.getText() == null || txtCertificateNumber.getText().length() == 0) {
 			errorMessage += "Set the Certificate Number \n";
 		}else{
-			if (!validatedNumber(txtCertificateNumber.getText())) {
+			if (!Validations.validatedNumber(txtCertificateNumber.getText())) {
 				errorMessage += "Only a numbers in the Certificate Number field \n";
 			}
 		}
 		if (txtMachineModel.getText() == null || txtMachineModel.getText().length() == 0) {
 			errorMessage += "Set the Machine Model \n";
+		}else{
+			if (!Validations.validatedNumber(txtCertificateNumber.getText())) {
+				errorMessage += "Only a numbers in the Machine Model \n";
+			}
 		}
 		
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			showAlert(errorMessage);
+			Validations.showAlert(errorMessage);
 			return false;
 		}
-	}
-
-	/**
-	 * Show Error Alert
-	 * 
-	 * @param errorMessage
-	 */
-	public void showAlert(String errorMessage) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Invalid Fields");
-		alert.setHeaderText("Please correct invalid fields");
-		alert.setContentText(errorMessage);
-
-		alert.showAndWait();
 	}
 
 	/**
@@ -205,29 +190,6 @@ public class BasicInfoController {
 	 */
 	public void setMainApp(MainGUI mainApp) {
 		this.mainGUI = mainApp;
-	}
-	
-	
-	public boolean validatedNumber(String text){
-		Pattern pat = Pattern.compile("[0-9.]+");
-		Matcher mat = pat.matcher(text);
-
-		if(text.isEmpty() || mat.matches()) {
-		    return true;
-		}else {
-			return false;
-		}
-	}
-	
-	public boolean validatedLetter(String text){
-		Pattern pat = Pattern.compile("[a-zA-Z]+");
-		Matcher mat = pat.matcher(text);
-
-		if(text.isEmpty() || mat.matches()) {
-		    return true;
-		}else {
-			return false;
-		}
 	}
 
 }
