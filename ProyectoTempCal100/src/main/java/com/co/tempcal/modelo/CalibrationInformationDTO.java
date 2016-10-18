@@ -1,10 +1,7 @@
 package com.co.tempcal.modelo;
 
-public class InformacionCalibracionDTO {
+public class CalibrationInformationDTO {
 	
-	/**
-	 * 
-	 */
 	private String calibrationDate;
 	
 	private String temperatureType;
@@ -17,11 +14,13 @@ public class InformacionCalibracionDTO {
 	
 	private String hotSensorTemp;
 	
-	private String coldBathTemp2;
+	private String testColdBathTemp;
 	
-	private String coldSensorTemp;
+	private String testColdSensorTemp;
 	
 	private String hotSensorTemp2;
+	
+	private String resultProcess;
 
 	public String getCalibrationDate() {
 		return calibrationDate;
@@ -71,22 +70,6 @@ public class InformacionCalibracionDTO {
 		this.hotSensorTemp = hotSensorTemp;
 	}
 
-	public String getColdBathTemp2() {
-		return coldBathTemp2;
-	}
-
-	public void setColdBathTemp2(String coldBathTemp2) {
-		this.coldBathTemp2 = coldBathTemp2;
-	}
-
-	public String getColdSensorTemp() {
-		return coldSensorTemp;
-	}
-
-	public void setColdSensorTemp(String coldSensorTemp) {
-		this.coldSensorTemp = coldSensorTemp;
-	}
-
 	public String getHotSensorTemp2() {
 		return hotSensorTemp2;
 	}
@@ -95,4 +78,29 @@ public class InformacionCalibracionDTO {
 		this.hotSensorTemp2 = hotSensorTemp2;
 	}
 
+	public String getTestColdBathTemp() {
+		return testColdBathTemp;
+	}
+
+	public void setTestColdBathTemp(String testColdBathTemp) {
+		this.testColdBathTemp = testColdBathTemp;
+	}
+
+	public String getTestColdSensorTemp() {
+		return testColdSensorTemp;
+	}
+
+	public void setTestColdSensorTemp(String testColdSensorTemp) {
+		this.testColdSensorTemp = testColdSensorTemp;
+	}
+
+	public String getResultProcess() {
+		return resultProcess;
+	}
+
+	public void setResultProcess(String resultProcess) {
+		this.resultProcess = resultProcess;
+	}
+
+	
 }

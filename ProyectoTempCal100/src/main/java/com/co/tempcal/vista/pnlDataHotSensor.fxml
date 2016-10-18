@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="525.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="com.co.tempcal.vista.DatosTemperaturaController">
+<AnchorPane prefHeight="200.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.co.tempcal.vista.TemperatureInfoController">
    <children>
-      <Button fx:id="btnCalcular" layoutX="360.0" layoutY="151.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Calculate Factor" onAction="#handleCalcular"/>
+      <Button fx:id="btnCalculate" layoutX="360.0" layoutY="151.0" mnemonicParsing="false" onAction="#handleCalculate" prefHeight="25.0" prefWidth="116.0" text="Calculate Factor" />
       <Label layoutX="21.0" layoutY="29.0" text="Now, put the Soak Sensor in the Hot Bath and wait while the temperature is stabilized">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -19,7 +18,7 @@
       <HBox layoutX="99.0" layoutY="88.0">
          <children>
             <Label text="Hot uncalib Sensor Temperature  " />
-            <TextField fx:id="txtHotCalibSensorTemp" />
+            <TextField fx:id="txtHotUncalibSensorTemp" />
          </children>
       </HBox>
    </children>

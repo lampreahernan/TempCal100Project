@@ -1,15 +1,14 @@
 package com.co.tempcal.vista;
 
-import java.time.LocalDate;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.co.tempcal.controlador.VentanaPrincipal;
-import com.co.tempcal.modelo.CertificadoDTO;
-import com.co.tempcal.modelo.InformacionCalibracionDTO;
+import com.co.tempcal.controlador.MainGUI;
+import com.co.tempcal.modelo.CertificateDTO;
+import com.co.tempcal.modelo.CalibrationInformationDTO;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -19,100 +18,98 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class DatosBasicoController {
+public class BasicInfoController {
 
 	/**
-	 * Identificador del Proceso
+	 * Serial Process
 	 */
 	@FXML
 	private TextField txtSerial;
 
 	/**
-	 * Persona que realiza el proceso
+	 * Person who realize the process
 	 */
 	@FXML
-	private TextField txtPersonalCalibra;
+	private TextField txtCalibrationPerson;
 
 	/**
-	 * Fecha del Proceso
+	 * Process Date
 	 */
 	@FXML
 	private DatePicker datePicker;
 
 	/**
-	 * Tipo de Temperatura
+	 * Tempertature Type
 	 */
 	@FXML
-	private ComboBox<String> cmbTipoTemperatura;
+	private ComboBox<String> cmbTemperatureType;
 	
 	/**
-	 * Dueño de la Maquina
+	 * Owner Machine
 	 */
 	@FXML
 	private TextField txtOwner;
 
 	/**
-	 * Numero del Certificado
+	 * Certificate Number
 	 */
 	@FXML
 	private TextField txtCertificateNumber;
 
 	/**
-	 * Modelo de la Maquina
+	 * Model Machine
 	 */
 	@FXML
 	private TextField txtMachineModel;
 
 	/**
-	 * Boton Siguiente
+	 * Button Next
 	 */
 	@FXML
-	private Button btnSiguiente;
+	private Button btnNext;
 
 	/**
-	 * Boton Cancelar
+	 * Button Cancel
 	 */
 	@FXML
 	private Button btnCancel;
 
 	/**
-	 * Stage actual
+	 * Actual Stage 
 	 */
 	private Stage dialogStage;
 
 	/**
-	 * DTO sobre el proceso
+	 * Process DTO 
 	 */
-	private InformacionCalibracionDTO infoCalibracion;
+	private CalibrationInformationDTO infoCalibration;
 
 	/**
 	 * DTO con la informacion del Certificado
 	 */
-	private CertificadoDTO infoCertificado;
+	private CertificateDTO infoCertificate;
 	
 	/**
 	 * Referencia al Main Principal
 	 */
-	private VentanaPrincipal mainVentana;
+	private MainGUI mainGUI;
 
-	
-	
+
 	@FXML
 	private void initialize() {
 		
-		TimeZone.setDefault(TimeZone.getTimeZone("America/Bogota"));
 		Locale.setDefault(Locale.ENGLISH);
 		
-		infoCalibracion = new InformacionCalibracionDTO();
-		infoCertificado = new CertificadoDTO();
+		infoCalibration = new CalibrationInformationDTO();
+		infoCertificate = new CertificateDTO();
 		
-		cmbTipoTemperatura.getItems().addAll("C", "F");
-		cmbTipoTemperatura.setValue("C");	
+		cmbTemperatureType.getItems().addAll("C", "F");
+		cmbTemperatureType.setValue("C");	
 		
 	}
 
 	/**
-	 * Setea el stage para el dialogo
+	 * Set Actual Stage
 	 * 
 	 * @param dialogStage
 	 */
@@ -121,21 +118,21 @@ public class DatosBasicoController {
 	}
 
 	/**
-	 * Accion del boton siguiente
+	 * Action button next
 	 */
 	@FXML
-	private void handleSiguiente() {
-		if (isFormValido()) {
-			infoCalibracion.setCalibrationDate(datePicker.getValue().toString());
-			infoCalibracion.setSerial(txtSerial.getText());
-			infoCalibracion.setCalibrationPerson(txtPersonalCalibra.getText());
-			infoCalibracion.setTemperatureType(cmbTipoTemperatura.getValue());
+	private void handleNext() {
+		if (isFormValid()) {
+			infoCalibration.setCalibrationDate(datePicker.getValue().toString());
+			infoCalibration.setSerial(txtSerial.getText());
+			infoCalibration.setCalibrationPerson(txtCalibrationPerson.getText());
+			infoCalibration.setTemperatureType(cmbTemperatureType.getValue());
 			
-			infoCertificado.setOwner(txtOwner.getText());
-			infoCertificado.setOwner(txtMachineModel.getText());
-			infoCertificado.setOwner(txtCertificateNumber.getText());
+			infoCertificate.setOwner(txtOwner.getText());
+			infoCertificate.setOwner(txtMachineModel.getText());
+			infoCertificate.setOwner(txtCertificateNumber.getText());
 
-			mainVentana.mostrarColdBathPanel(this.dialogStage, infoCalibracion);
+			mainGUI.showColdBathPanel(this.dialogStage, infoCalibration, infoCertificate);
 
 		}
 	}
@@ -144,16 +141,12 @@ public class DatosBasicoController {
 	 * Accion del Boton Cancelar
 	 */
 	@FXML
-	private void handleCancelar() {
+	private void handleCancel() {
 		dialogStage.close();
 	}
 
-	/**
-	 * Valida los campos del formulario
-	 * 
-	 * @return true si los datos estan bien
-	 */
-	private boolean isFormValido() {
+	
+	private boolean isFormValid() {
 		String errorMessage = "";
 		
 		if (datePicker.getValue() == null || datePicker.getValue().toString().length() == 0) {
@@ -161,8 +154,12 @@ public class DatosBasicoController {
 		}
 		if (txtSerial.getText() == null || txtSerial.getText().length() == 0) {
 			errorMessage += "Set a Serial \n";
+		}else{
+			if (!validatedNumber(txtSerial.getText())) {
+				errorMessage += "Only a numbers in the Serial field \n";
+			}
 		}
-		if (txtPersonalCalibra.getText() == null || txtPersonalCalibra.getText().length() == 0) {
+		if (txtCalibrationPerson.getText() == null || txtCalibrationPerson.getText().length() == 0) {
 			errorMessage += "Set the person who will performed process \n";
 		}
 		if (txtOwner.getText() == null || txtOwner.getText().length() == 0) {
@@ -170,10 +167,15 @@ public class DatosBasicoController {
 		}
 		if (txtCertificateNumber.getText() == null || txtCertificateNumber.getText().length() == 0) {
 			errorMessage += "Set the Certificate Number \n";
+		}else{
+			if (!validatedNumber(txtCertificateNumber.getText())) {
+				errorMessage += "Only a numbers in the Certificate Number field \n";
+			}
 		}
 		if (txtMachineModel.getText() == null || txtMachineModel.getText().length() == 0) {
 			errorMessage += "Set the Machine Model \n";
 		}
+		
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
@@ -183,7 +185,7 @@ public class DatosBasicoController {
 	}
 
 	/**
-	 * Muestra una ventana con un mensaje
+	 * Show Error Alert
 	 * 
 	 * @param errorMessage
 	 */
@@ -201,8 +203,31 @@ public class DatosBasicoController {
 	 * 
 	 * @param mainApp
 	 */
-	public void setMainApp(VentanaPrincipal mainApp) {
-		this.mainVentana = mainApp;
+	public void setMainApp(MainGUI mainApp) {
+		this.mainGUI = mainApp;
+	}
+	
+	
+	public boolean validatedNumber(String text){
+		Pattern pat = Pattern.compile("[0-9.]+");
+		Matcher mat = pat.matcher(text);
+
+		if(text.isEmpty() || mat.matches()) {
+		    return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean validatedLetter(String text){
+		Pattern pat = Pattern.compile("[a-zA-Z]+");
+		Matcher mat = pat.matcher(text);
+
+		if(text.isEmpty() || mat.matches()) {
+		    return true;
+		}else {
+			return false;
+		}
 	}
 
 }
