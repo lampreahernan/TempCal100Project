@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="200.0" prefWidth="525.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="com.co.tempcal.vista.DatosTemperaturaController">
+<AnchorPane prefHeight="200.0" prefWidth="525.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="com.co.tempcal.vista.TemperatureInfoController">
    <children>
       <Label layoutX="14.0" layoutY="28.0" text="Please put the Soak Sensor in the Cold Bath and wait while the temperature is stabilized" textAlignment="CENTER" textOverrun="CLIP">
          <font>
@@ -21,6 +21,6 @@
             <TextField fx:id="txtColdBathTemp" />
          </children>
       </HBox>
-      <Button fx:id="btnSiguiente" layoutX="372.0" layoutY="151.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Next" onAction="#handleSiguiente"/>
+      <Button fx:id="btnNext" layoutX="372.0" layoutY="151.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0" text="Next" onAction="#handleNext"/>
    </children>
 </AnchorPane>

@@ -1,12 +1,12 @@
 package com.co.tempcal.vista;
 
-import com.co.tempcal.controlador.VentanaPrincipal;
+import com.co.tempcal.controlador.MainGUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Reflection;
 
-public class VentanaPrincipalController {
+public class MainGUIController {
 
 	@FXML
 	private Button btnNuevoProceso;
@@ -17,20 +17,19 @@ public class VentanaPrincipalController {
 	/**
 	 * Referencia al Main Principal
 	 */
-	private VentanaPrincipal mainVentana;
+	private MainGUI mainVentana;
 	
 	
 	/**
 	 * Constructor
 	 */
-	public VentanaPrincipalController() {
+	public MainGUIController() {
 	}
 	
 	/**
 	 * 
 	 */
 	private void initialize(){
-		
 		 btnNuevoProceso.setEffect(new Reflection());
 	}
 	
@@ -38,9 +37,8 @@ public class VentanaPrincipalController {
 	 * Called when the user clicks on the delete button.
 	 */
 	@FXML
-	private void controladorBtnNuevo() {
-		
-		mainVentana.mostrarPanelDatosBasicos();
+	private void controladorBtnNuevo() {		
+		mainVentana.showBasicInformationPanel();
 	}
 	
 	
@@ -49,7 +47,7 @@ public class VentanaPrincipalController {
      * 
      * @param mainApp
      */
-    public void setMainApp(VentanaPrincipal mainApp) {
+    public void setMainApp(MainGUI mainApp) {
         this.mainVentana = mainApp;
     }
 

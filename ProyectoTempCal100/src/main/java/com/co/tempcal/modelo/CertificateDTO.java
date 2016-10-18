@@ -1,19 +1,19 @@
 package com.co.tempcal.modelo;
 
-public class CertificadoDTO {
+public class CertificateDTO {
 	
 	/**
-	 * Propietario de la Maquina
+	 * machine owner
 	 */
 	private String owner;
 	
 	/**
-	 * Numero del Certificado
+	 * certificate number
 	 */
 	private String certificateNumber;
 	
 	/**
-	 * Modelo de la Maquina
+	 * Machine Model
 	 */
 	private String machineModel;
 
