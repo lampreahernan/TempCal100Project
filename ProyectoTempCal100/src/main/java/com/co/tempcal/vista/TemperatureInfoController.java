@@ -95,35 +95,55 @@ public class TemperatureInfoController {
 
 	@FXML
 	private void handleNext() {
-		
+
 		String errorMessage = "";
-		
+
 		if (txtColdBathTemp.getText() == null || txtColdBathTemp.getText().length() == 0) {
 			errorMessage += "Set the Cold Bath Temp \n";
-		}else{
+		} else {
 			if (!Validations.validatedDecimals(txtColdBathTemp.getText())) {
 				errorMessage += "Only a numbers in the Cold Bath field with ONE decimal \n";
-			}	
+			}
 		}
-		
-		infoCalibracion.setColdBathTemp1(txtColdBathTemp.getText());
-		mainGUI.showHotSensorPanel(this.dialogStage, this.infoCalibracion, this.infoCertificate);
+
+		if (errorMessage.length() == 0) {
+			infoCalibracion.setColdBathTemp1(txtColdBathTemp.getText());
+			mainGUI.showHotSensorPanel(this.dialogStage, this.infoCalibracion, this.infoCertificate);
+		} else {
+			Validations.showAlert(errorMessage);
+		}
+
 	}
 
 	@FXML
 	private void handleCalculate() {
-		infoCalibracion.setHotSensorTemp(txtHotUncalibSensorTemp.getText());
 
-		float factor = calculations.calculateFactor(infoCalibracion.getColdBathTemp1(),
-				infoCalibracion.getHotSensorTemp(), infoCalibracion.getTemperatureType());
+		String errorMessage = "";
 
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Calculation Factor");
-		alert.setHeaderText("Temperatura del Sensor");
-		alert.setContentText(String.valueOf(factor));
-		alert.showAndWait();
+		if (txtHotUncalibSensorTemp.getText() == null || txtHotUncalibSensorTemp.getText().length() == 0) {
+			errorMessage += "Set the Cold Bath Temp \n";
+		} else {
+			if (!Validations.validatedDecimals(txtHotUncalibSensorTemp.getText())) {
+				errorMessage += "Only a numbers in the Hot Uncalib Sensor field with ONE decimal \n";
+			}
+		}
 
-		mainGUI.showTestTemperaturePanel(dialogStage, infoCalibracion, this.infoCertificate);
+		if (errorMessage.length() == 0) {
+			infoCalibracion.setHotSensorTemp(txtHotUncalibSensorTemp.getText());
+			float factor = calculations.calculateFactor(infoCalibracion.getColdBathTemp1(),
+					infoCalibracion.getHotSensorTemp(), infoCalibracion.getTemperatureType());
+
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Calculation Factor");
+			alert.setHeaderText("Temperatura del Sensor");
+			alert.setContentText(String.valueOf(factor));
+			alert.showAndWait();
+
+			mainGUI.showTestTemperaturePanel(dialogStage, infoCalibracion, this.infoCertificate);
+		} else {
+			Validations.showAlert(errorMessage);
+		}
+
 	}
 
 	@FXML
