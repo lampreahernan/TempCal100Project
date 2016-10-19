@@ -33,7 +33,7 @@ public class MainGUI extends Application {
 	public void start(Stage primaryStage) {
 		this.stgMainGUI = primaryStage;
 		this.stgMainGUI.setTitle("TempCal100");
-		this.stgMainGUI.getIcons().add(new Image("images/icon.png"));
+		this.stgMainGUI.getIcons().add(new Image("com/co/tempcal/images/icon.png"));
 
 		initGUI();
 

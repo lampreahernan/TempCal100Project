@@ -148,17 +148,57 @@ public class TemperatureInfoController {
 
 	@FXML
 	private void handleValidate() {
+		
+		if(validateInfoTest()){
+			infoCalibracion.setTestColdBathTemp(txtTestColdBathTemp.getText());
+			infoCalibracion.setTestColdSensorTemp(txtTestColdSensorTemp.getText());
+			
+			if(calculations.evaluateCalibration(infoCalibracion.getTestColdBathTemp(), infoCalibracion.getTestColdSensorTemp(), infoCalibracion.getTemperatureType())){
+				infoCalibracion.setResultProcess("PROCESS PASSED");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Result Process");
+				alert.setHeaderText("PROCESS PASSED");
+				alert.showAndWait();
+			}else{
+				infoCalibracion.setResultProcess("PROCESS FAILED");
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Result Process");
+				alert.setHeaderText("PROCESS FAILED");
+				alert.showAndWait();
+			}
+			
+			mainGUI.showResultPanel(dialogStage, infoCalibracion, infoCertificate);
+		}
+		
+		
 
-		infoCalibracion.setTestColdBathTemp(txtTestColdBathTemp.getText());
-		infoCalibracion.setTestColdSensorTemp(txtTestColdSensorTemp.getText());
+	}
 
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Result Process");
-		alert.setHeaderText("TPH2");
-		alert.setContentText("PROCESS PASS");
-		alert.showAndWait();
+	private boolean validateInfoTest() {
+		String errorMessage = "";
 
-		mainGUI.showResultPanel(dialogStage, infoCalibracion, infoCertificate);
+		if (this.txtTestColdBathTemp.getText() == null || this.txtTestColdBathTemp.getText().length() == 0) {
+			errorMessage += "Set the Cold Bath Temp \n";
+		} else {
+			if (!Validations.validatedDecimals(this.txtTestColdBathTemp.getText())) {
+				errorMessage += "Only a numbers in the Cold Bath Temp field with ONE decimal \n";
+			}
+		}
+
+		if (this.txtTestColdSensorTemp.getText() == null || this.txtTestColdSensorTemp.getText().length() == 0) {
+			errorMessage += "Set the Cold Sensor Temp \n";
+		} else {
+			if (!Validations.validatedDecimals(this.txtTestColdSensorTemp.getText())) {
+				errorMessage += "Only a numbers in the Cold Sensor Temp field with ONE decimal \n";
+			}
+		}
+
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			Validations.showAlert(errorMessage);
+			return false;
+		}
 
 	}
 

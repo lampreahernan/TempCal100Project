@@ -34,7 +34,7 @@ public class Validations {
 	}
 	
 	public static boolean validatedDecimals(String text){
-		Pattern pat = Pattern.compile("[0-9]{2}[.]{1}[0-9]{1}+");
+		Pattern pat = Pattern.compile("[0-9]{2,3}[.]{1}[0-9]{1}+");
 		Matcher mat = pat.matcher(text);
 
 		if(text.isEmpty() || mat.matches()) {
