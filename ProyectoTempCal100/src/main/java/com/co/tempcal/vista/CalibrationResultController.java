@@ -32,9 +32,6 @@ public class CalibrationResultController {
 	private TextField txtColdBathTemp;
 
 	@FXML
-	private TextField txtHotBathTemp;
-
-	@FXML
 	private TextField txtHotUncalibSensor;
 
 	@FXML
@@ -103,12 +100,20 @@ public class CalibrationResultController {
 		txtCalibBy.setText(infoCalibracion.getCalibrationPerson());
 		txtTypeTemp.setText(infoCalibracion.getTemperatureType());
 		txtColdBathTemp.setText(infoCalibracion.getColdBathTemp1());
-		// txtHotBathTemp.setText(infoCalibracion.get);
 		txtHotCalibSensor.setText(infoCalibracion.getHotSensorTemp2());
 		txtHotUncalibSensor.setText(infoCalibracion.getHotSensorTemp());
 		txtTestColdBath.setText(infoCalibracion.getTestColdBathTemp());
 		txtTestColdSensor.setText(infoCalibracion.getTestColdSensorTemp());
 		txtProcedureResult.setText(infoCalibracion.getResultProcess());
+		
+		if(infoCalibracion.getResultProcess().equals("PROCESS PASSED")){
+			btnGeneteCertificate.setDisable(false);
+			btnResetProcess.setDisable(true);
+		}else{
+			btnGeneteCertificate.setDisable(true);
+			btnResetProcess.setDisable(false);
+		}
+		
 	}
 
 	/**

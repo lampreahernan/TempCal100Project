@@ -7,11 +7,15 @@ import com.co.tempcal.modelo.CertificateDTO;
 import com.co.tempcal.modelo.Validations;
 import com.co.tempcal.modelo.CalibrationInformationDTO;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class BasicInfoController {
@@ -101,6 +105,9 @@ public class BasicInfoController {
 		cmbTemperatureType.getItems().addAll("C", "F");
 		cmbTemperatureType.setValue("C");	
 		
+		txtCalibrationPerson.addEventHandler(KeyEvent.KEY_RELEASED, changeUpperCase);
+		txtOwner.addEventHandler(KeyEvent.KEY_RELEASED, changeUpperCase);
+		
 	}
 
 	/**
@@ -111,6 +118,18 @@ public class BasicInfoController {
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
+	
+	EventHandler<Event> changeUpperCase = new EventHandler<Event>() {
+		
+		@Override
+		public void handle(Event event) {
+			TextField txtField = (TextField) event.getSource();
+			int currentPosition=txtField.getCaretPosition();
+			txtField.setText(txtField.getText().toUpperCase());
+			txtField.positionCaret(currentPosition);
+			
+		}
+	};
 
 	/**
 	 * Action button next
@@ -190,6 +209,10 @@ public class BasicInfoController {
 	 */
 	public void setMainApp(MainGUI mainApp) {
 		this.mainGUI = mainApp;
+	}
+	
+	public void changeUpperCase(TextField txtFIeld){
+		txtFIeld.setText(txtFIeld.getText().toUpperCase());
 	}
 
 }

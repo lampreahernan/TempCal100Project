@@ -35,7 +35,13 @@ public class TemperatureCalculations {
 		return factor;
 	}
 	
-	
+	/**
+	 * This method validates the result of calibration 
+	 * @param coldBathTemp2
+	 * @param coldSensorTemp
+	 * @param temperatureType
+	 * @return
+	 */
 	public boolean evaluateCalibration(String coldBathTemp2, String coldSensorTemp, String temperatureType){
 		
 		float coldBath=Float.parseFloat(coldBathTemp2);
@@ -63,8 +69,7 @@ public class TemperatureCalculations {
 		}
 		
 		return resultProcess;
-		
-		
+	
 	}
 
 }

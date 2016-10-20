@@ -132,10 +132,10 @@ public class TemperatureInfoController {
 			infoCalibracion.setHotSensorTemp(txtHotUncalibSensorTemp.getText());
 			float factor = calculations.calculateFactor(infoCalibracion.getColdBathTemp1(),
 					infoCalibracion.getHotSensorTemp(), infoCalibracion.getTemperatureType());
-
+			infoCalibracion.setHotSensorTemp2(String.valueOf(factor));
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Calculation Factor");
-			alert.setHeaderText("Temperatura del Sensor");
+			alert.setHeaderText("The Factor is: ");
 			alert.setContentText(String.valueOf(factor));
 			alert.showAndWait();
 

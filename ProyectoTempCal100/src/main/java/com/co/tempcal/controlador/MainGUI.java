@@ -89,7 +89,7 @@ public class MainGUI extends Application {
 			loader.setLocation(MainGUI.class.getClassLoader().getResource("com/co/tempcal/vista/pnlBasicInfo.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
-			// dialogStage.getIcons().add(new Image("images/icon.png"));
+			dialogStage.getIcons().add(new Image("com/co/tempcal/images/icon.png"));
 			dialogStage.setTitle("Basic Information");
 			dialogStage.initOwner(stgMainGUI);
 			Scene scene = new Scene(page);

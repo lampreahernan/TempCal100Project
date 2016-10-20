@@ -20,8 +20,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Test Cold Temp" />
-            <Label text="Test Cold Sensor" GridPane.rowIndex="1" />
+            <Label text="Test Cold Bath Temp" />
+            <Label text="Test Cold Sensor Temp" GridPane.rowIndex="1" />
             <TextField fx:id="txtTestColdBathTemp" GridPane.columnIndex="1" />
             <TextField fx:id="txtTestColdSensorTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>

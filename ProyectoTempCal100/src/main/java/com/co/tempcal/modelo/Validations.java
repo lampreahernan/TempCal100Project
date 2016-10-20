@@ -11,6 +11,11 @@ public class Validations {
 	private Validations(){
 	}
 	
+	/**
+	 * Validates that the text only contain Numbers
+	 * @param text
+	 * @return
+	 */
 	public static boolean validatedNumber(String text){
 		Pattern pat = Pattern.compile("[0-9]+");
 		Matcher mat = pat.matcher(text);
@@ -22,6 +27,11 @@ public class Validations {
 		}
 	}
 	
+	/**
+	 * Validates that the text only contain Letters
+	 * @param text
+	 * @return
+	 */
 	public static boolean validatedLetter(String text){
 		Pattern pat = Pattern.compile("[a-zA-Z]+");
 		Matcher mat = pat.matcher(text);
@@ -33,6 +43,11 @@ public class Validations {
 		}
 	}
 	
+	/**
+	 * Validates that the text only contain 3 numbers after point and then a One number
+	 * @param text
+	 * @return
+	 */
 	public static boolean validatedDecimals(String text){
 		Pattern pat = Pattern.compile("[0-9]{2,3}[.]{1}[0-9]{1}+");
 		Matcher mat = pat.matcher(text);
