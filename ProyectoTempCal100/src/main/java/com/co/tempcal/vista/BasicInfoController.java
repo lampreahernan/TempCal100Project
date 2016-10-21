@@ -9,7 +9,6 @@ import com.co.tempcal.modelo.CalibrationInformationDTO;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -19,7 +18,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class BasicInfoController {
-
+	
+	public static final String CELSIUS="CELSIUS";
+	
+	public static final String FAHRENHEIT="FAHRENHEIT";
+	
 	/**
 	 * Serial Process
 	 */
@@ -102,8 +105,7 @@ public class BasicInfoController {
 		infoCalibration = new CalibrationInformationDTO();
 		infoCertificate = new CertificateDTO();
 		
-		cmbTemperatureType.getItems().addAll("C", "F");
-		cmbTemperatureType.setValue("C");	
+		cmbTemperatureType.getItems().addAll(CELSIUS, FAHRENHEIT);
 		
 		txtCalibrationPerson.addEventHandler(KeyEvent.KEY_RELEASED, changeUpperCase);
 		txtOwner.addEventHandler(KeyEvent.KEY_RELEASED, changeUpperCase);
@@ -172,6 +174,9 @@ public class BasicInfoController {
 			if (!Validations.validatedNumber(txtSerial.getText())) {
 				errorMessage += "Only a numbers in the Serial field \n";
 			}
+		}
+		if (cmbTemperatureType.getValue() == null || cmbTemperatureType.getValue().length() == 0) {
+			errorMessage += "Choose the Temperature Type Celsius or Fahrenheit \n";
 		}
 		if (txtCalibrationPerson.getText() == null || txtCalibrationPerson.getText().length() == 0) {
 			errorMessage += "Set the person who will performed process \n";

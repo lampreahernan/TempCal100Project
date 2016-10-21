@@ -131,7 +131,7 @@ public class TemperatureInfoController {
 		if (errorMessage.length() == 0) {
 			infoCalibracion.setHotSensorTemp(txtHotUncalibSensorTemp.getText());
 			float factor = calculations.calculateFactor(infoCalibracion.getColdBathTemp1(),
-					infoCalibracion.getHotSensorTemp(), infoCalibracion.getTemperatureType());
+					infoCalibracion.getHotSensorTemp(), infoCalibracion.getHotBathTemp());
 			infoCalibracion.setHotSensorTemp2(String.valueOf(factor));
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Calculation Factor");
@@ -148,29 +148,29 @@ public class TemperatureInfoController {
 
 	@FXML
 	private void handleValidate() {
-		
-		if(validateInfoTest()){
+
+		if (validateInfoTest()) {
 			infoCalibracion.setTestColdBathTemp(txtTestColdBathTemp.getText());
 			infoCalibracion.setTestColdSensorTemp(txtTestColdSensorTemp.getText());
-			
-			if(calculations.evaluateCalibration(infoCalibracion.getTestColdBathTemp(), infoCalibracion.getTestColdSensorTemp(), infoCalibracion.getTemperatureType())){
+
+			if (calculations.evaluateCalibration(infoCalibracion.getTestColdBathTemp(),
+					infoCalibracion.getTestColdSensorTemp(), infoCalibracion.getTemperatureType())) {
 				infoCalibracion.setResultProcess("PROCESS PASSED");
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Result Process");
 				alert.setHeaderText("PROCESS PASSED");
 				alert.showAndWait();
-			}else{
+			} else {
 				infoCalibracion.setResultProcess("PROCESS FAILED");
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Result Process");
 				alert.setHeaderText("PROCESS FAILED");
+				alert.setContentText("Please restart the process");
 				alert.showAndWait();
 			}
-			
+
 			mainGUI.showResultPanel(dialogStage, infoCalibracion, infoCertificate);
 		}
-		
-		
 
 	}
 

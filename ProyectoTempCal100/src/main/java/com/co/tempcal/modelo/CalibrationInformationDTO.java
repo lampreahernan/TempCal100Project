@@ -1,5 +1,7 @@
 package com.co.tempcal.modelo;
 
+import com.co.tempcal.vista.BasicInfoController;
+
 public class CalibrationInformationDTO {
 	
 	private String calibrationDate;
@@ -40,10 +42,10 @@ public class CalibrationInformationDTO {
 		this.temperatureType = temperatureType;
 
 		// Celsius or Fahrenheit
-		if (temperatureType.equals("C")) {
+		if (temperatureType.equals(BasicInfoController.CELSIUS)) {
 			hotBathTemp = "70";
 		} else {
-			if (temperatureType.equals("F")) {
+			if (temperatureType.equals(BasicInfoController.FAHRENHEIT)) {
 				hotBathTemp = "158";
 			}
 		}

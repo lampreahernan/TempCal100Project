@@ -27,13 +27,6 @@ public class MainGUIController {
 	}
 	
 	/**
-	 * 
-	 */
-	private void initialize(){
-		 btnNuevoProceso.setEffect(new Reflection());
-	}
-	
-	/**
 	 * Called when the user clicks on the delete button.
 	 */
 	@FXML

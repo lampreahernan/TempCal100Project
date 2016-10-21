@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+@SuppressWarnings("unused")
 public class MainGUI extends Application {
 
 	/**

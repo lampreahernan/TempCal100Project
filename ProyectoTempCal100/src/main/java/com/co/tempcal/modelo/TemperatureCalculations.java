@@ -1,5 +1,7 @@
 package com.co.tempcal.modelo;
 
+import com.co.tempcal.vista.BasicInfoController;
+
 public class TemperatureCalculations {
 	
 	public final float ERROR_RANGE_CELCIUS = (float) 0.2;
@@ -41,10 +43,10 @@ public class TemperatureCalculations {
 		boolean resultProcess = false;
 		
 		// Celsius or Fahrenheit
-		if (temperatureType.equals("C")) {
+		if (temperatureType.equals(BasicInfoController.CELSIUS)) {
 			errorRange = ERROR_RANGE_CELCIUS;
 		} else {
-			if (temperatureType.equals("F")) {
+			if (temperatureType.equals(BasicInfoController.FAHRENHEIT)) {
 				errorRange = ERROR_RANGE_FAHRENHEIT;
 			}
 		}
