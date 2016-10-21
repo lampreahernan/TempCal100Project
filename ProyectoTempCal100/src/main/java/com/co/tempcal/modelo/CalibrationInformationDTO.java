@@ -12,6 +12,8 @@ public class CalibrationInformationDTO {
 	
 	private String coldBathTemp1;
 	
+	private String hotBathTemp;
+	
 	private String hotSensorTemp;
 	
 	private String testColdBathTemp;
@@ -36,6 +38,16 @@ public class CalibrationInformationDTO {
 
 	public void setTemperatureType(String temperatureType) {
 		this.temperatureType = temperatureType;
+
+		// Celsius or Fahrenheit
+		if (temperatureType.equals("C")) {
+			hotBathTemp = "70";
+		} else {
+			if (temperatureType.equals("F")) {
+				hotBathTemp = "158";
+			}
+		}
+
 	}
 
 	public String getCalibrationPerson() {
@@ -102,5 +114,12 @@ public class CalibrationInformationDTO {
 		this.resultProcess = resultProcess;
 	}
 
+	public String getHotBathTemp() {
+		return hotBathTemp;
+	}
+
+	public void setHotBathTemp(String hotBathTemp) {
+		this.hotBathTemp = hotBathTemp;
+	}
 	
 }

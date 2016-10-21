@@ -30,6 +30,9 @@ public class CalibrationResultController {
 
 	@FXML
 	private TextField txtColdBathTemp;
+	
+	@FXML
+	private TextField txtHotBathTemp;
 
 	@FXML
 	private TextField txtHotUncalibSensor;
@@ -105,6 +108,7 @@ public class CalibrationResultController {
 		txtTestColdBath.setText(infoCalibracion.getTestColdBathTemp());
 		txtTestColdSensor.setText(infoCalibracion.getTestColdSensorTemp());
 		txtProcedureResult.setText(infoCalibracion.getResultProcess());
+		txtHotBathTemp.setText(infoCalibracion.getHotBathTemp());
 		
 		if(infoCalibracion.getResultProcess().equals("PROCESS PASSED")){
 			btnGeneteCertificate.setDisable(false);

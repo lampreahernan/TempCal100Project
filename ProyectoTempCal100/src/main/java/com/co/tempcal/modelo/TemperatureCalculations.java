@@ -17,18 +17,9 @@ public class TemperatureCalculations {
 	public float calculateFactor(String coldBathTemp, String hotUncalibSensorTemp, String temperatureType) {
 
 		float factor = 0;
-		float temperature = 0;
+		float temperature = Float.parseFloat(temperatureType);
 		float coldBath = Float.parseFloat(coldBathTemp);
 		float hotUncalibSensor = Float.parseFloat(hotUncalibSensorTemp);
-
-		// Celsius or Fahrenheit
-		if (temperatureType.equals("C")) {
-			temperature = (float) 70.0;
-		} else {
-			if (temperatureType.equals("F")) {
-				temperature = (float) 158.0;
-			}
-		}
 
 		factor = (float) (hotUncalibSensor * ((temperature - coldBath) / (hotUncalibSensor - coldBath)));
 
