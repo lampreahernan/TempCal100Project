@@ -24,6 +24,12 @@ public class BasicInfoController {
 	public static final String FAHRENHEIT="FAHRENHEIT";
 	
 	/**
+	 * Serial Length
+	 */
+	@FXML
+	private TextField txtSerialLength;
+	
+	/**
 	 * Serial Process
 	 */
 	@FXML
@@ -46,6 +52,18 @@ public class BasicInfoController {
 	 */
 	@FXML
 	private ComboBox<String> cmbTemperatureType;
+	
+	/**
+	 * Tempertature Type
+	 */
+	@FXML
+	private ComboBox<String> cmbMachineType;
+	
+	/**
+	 * Tempertature Type
+	 */
+	@FXML
+	private ComboBox<String> cmbCalibrationType;
 	
 	/**
 	 * Owner Machine

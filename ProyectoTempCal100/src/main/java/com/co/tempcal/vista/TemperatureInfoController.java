@@ -9,6 +9,7 @@ import com.co.tempcal.modelo.Validations;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -41,6 +42,12 @@ public class TemperatureInfoController {
 
 	@FXML
 	private TextField txtTestColdSensorTemp;
+
+	@FXML
+	private Label lblCalculateFactor;
+
+	@FXML
+	private TextField txtTestCalculationFactor;
 
 	/**
 	 * Current Stage
@@ -139,7 +146,8 @@ public class TemperatureInfoController {
 			alert.setContentText(String.valueOf(factor));
 			alert.showAndWait();
 
-			mainGUI.showTestTemperaturePanel(dialogStage, infoCalibracion, this.infoCertificate);
+			mainGUI.showInformationPanel(dialogStage, infoCalibracion, infoCertificate);
+
 		} else {
 			Validations.showAlert(errorMessage);
 		}

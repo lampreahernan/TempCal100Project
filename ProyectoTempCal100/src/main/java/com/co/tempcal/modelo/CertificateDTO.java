@@ -13,9 +13,29 @@ public class CertificateDTO {
 	private String certificateNumber;
 	
 	/**
+	 * machine type New or Repaired
+	 */
+	private String typeMachine;
+	
+	/**
+	 * calibrated date
+	 */
+	private String calibratedDate;
+	
+	/**
 	 * Machine Model
 	 */
 	private String machineModel;
+	
+	/**
+	 * Calibration Type Open, Restricted o Closed
+	 */
+	private String calibrationType;
+	
+	/**
+	 * Serial Length
+	 */
+	private String serialLength;
 
 	
 	public String getOwner() {
@@ -41,6 +61,37 @@ public class CertificateDTO {
 	public void setMachineModel(String machineModel) {
 		this.machineModel = machineModel;
 	}
-	
+
+	public String getTypeMachine() {
+		return typeMachine;
+	}
+
+	public void setTypeMachine(String typeMachine) {
+		this.typeMachine = typeMachine;
+	}
+
+	public String getCalibratedDate() {
+		return calibratedDate;
+	}
+
+	public void setCalibratedDate(String calibratedDate) {
+		this.calibratedDate = calibratedDate;
+	}
+
+	public String getCalibrationType() {
+		return calibrationType;
+	}
+
+	public void setCalibrationType(String calibrationType) {
+		this.calibrationType = calibrationType;
+	}
+
+	public String getSerialLength() {
+		return serialLength;
+	}
+
+	public void setSerialLength(String serialLength) {
+		this.serialLength = serialLength;
+	}
 	
 }

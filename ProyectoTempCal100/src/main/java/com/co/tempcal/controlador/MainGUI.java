@@ -7,6 +7,7 @@ import com.co.tempcal.modelo.CertificateDTO;
 import com.co.tempcal.vista.BasicInfoController;
 import com.co.tempcal.vista.TemperatureInfoController;
 import com.co.tempcal.vista.CalibrationResultController;
+import com.co.tempcal.vista.InformationTestController;
 import com.co.tempcal.vista.MainGUIController;
 
 import javafx.application.Application;
@@ -34,7 +35,7 @@ public class MainGUI extends Application {
 	public void start(Stage primaryStage) {
 		this.stgMainGUI = primaryStage;
 		this.stgMainGUI.setTitle("TempCal100");
-		//this.stgMainGUI.getIcons().add(new Image("com/co/tempcal/images/icon.png"));
+		this.stgMainGUI.getIcons().add(new Image("com/co/tempcal/images/icon.png"));
 
 		initGUI();
 
@@ -90,7 +91,7 @@ public class MainGUI extends Application {
 			loader.setLocation(MainGUI.class.getClassLoader().getResource("com/co/tempcal/vista/pnlBasicInfo.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
-			//dialogStage.getIcons().add(new Image("com/co/tempcal/images/icon.png"));
+			dialogStage.getIcons().add(new Image("com/co/tempcal/images/icon.png"));
 			dialogStage.setTitle("Basic Information");
 			dialogStage.initOwner(stgMainGUI);
 			Scene scene = new Scene(page);
@@ -123,6 +124,32 @@ public class MainGUI extends Application {
 			dialogStage.setScene(scene);
 
 			CalibrationResultController controller = loader.getController();
+			controller.setDialogStage(dialogStage, infoCalibracion, infoCertificate);
+			controller.setMainApp(this);
+
+			dialogStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Load the information panel
+	 */
+	public void showInformationPanel(Stage dialogStage, CalibrationInformationDTO infoCalibracion,
+			CertificateDTO infoCertificate) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(
+					MainGUI.class.getClassLoader().getResource("com/co/tempcal/vista/pnlInfoFactor.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			dialogStage.setTitle("Result Process #" + infoCalibracion.getSerial());
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			InformationTestController controller = loader.getController();
 			controller.setDialogStage(dialogStage, infoCalibracion, infoCertificate);
 			controller.setMainApp(this);
 
