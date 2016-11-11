@@ -18,17 +18,17 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class BasicInfoController {
-	
-	public static final String CELSIUS="CELSIUS";
-	
-	public static final String FAHRENHEIT="FAHRENHEIT";
-	
+
+	public static final String CELSIUS = "CELSIUS";
+
+	public static final String FAHRENHEIT = "FAHRENHEIT";
+
 	/**
 	 * Serial Length
 	 */
 	@FXML
 	private TextField txtSerialLength;
-	
+
 	/**
 	 * Serial Process
 	 */
@@ -52,19 +52,19 @@ public class BasicInfoController {
 	 */
 	@FXML
 	private ComboBox<String> cmbTemperatureType;
-	
+
 	/**
 	 * Tempertature Type
 	 */
 	@FXML
 	private ComboBox<String> cmbMachineType;
-	
+
 	/**
 	 * Tempertature Type
 	 */
 	@FXML
 	private ComboBox<String> cmbCalibrationType;
-	
+
 	/**
 	 * Owner Machine
 	 */
@@ -96,12 +96,12 @@ public class BasicInfoController {
 	private Button btnCancel;
 
 	/**
-	 * Actual Stage 
+	 * Actual Stage
 	 */
 	private Stage dialogStage;
 
 	/**
-	 * Process DTO 
+	 * Process DTO
 	 */
 	private CalibrationInformationDTO infoCalibration;
 
@@ -109,7 +109,7 @@ public class BasicInfoController {
 	 * DTO con la informacion del Certificado
 	 */
 	private CertificateDTO infoCertificate;
-	
+
 	/**
 	 * Referencia al Main Principal
 	 */
@@ -117,17 +117,19 @@ public class BasicInfoController {
 
 	@FXML
 	private void initialize() {
-		
+
 		Locale.setDefault(Locale.ENGLISH);
-		
+
 		infoCalibration = new CalibrationInformationDTO();
 		infoCertificate = new CertificateDTO();
-		
+
 		cmbTemperatureType.getItems().addAll(CELSIUS, FAHRENHEIT);
-		
+		cmbCalibrationType.getItems().addAll("NEW", "REPAIRED");
+		cmbMachineType.getItems().addAll("OPEN", "CLOSED", "RESTRICTED");
+
 		txtCalibrationPerson.addEventHandler(KeyEvent.KEY_RELEASED, changeUpperCase);
 		txtOwner.addEventHandler(KeyEvent.KEY_RELEASED, changeUpperCase);
-		
+
 	}
 
 	/**
@@ -138,16 +140,16 @@ public class BasicInfoController {
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 	}
-	
+
 	EventHandler<Event> changeUpperCase = new EventHandler<Event>() {
-		
+
 		@Override
 		public void handle(Event event) {
 			TextField txtField = (TextField) event.getSource();
-			int currentPosition=txtField.getCaretPosition();
+			int currentPosition = txtField.getCaretPosition();
 			txtField.setText(txtField.getText().toUpperCase());
 			txtField.positionCaret(currentPosition);
-			
+
 		}
 	};
 
@@ -161,10 +163,14 @@ public class BasicInfoController {
 			infoCalibration.setSerial(txtSerial.getText());
 			infoCalibration.setCalibrationPerson(txtCalibrationPerson.getText());
 			infoCalibration.setTemperatureType(cmbTemperatureType.getValue());
-			
+
 			infoCertificate.setOwner(txtOwner.getText());
-			infoCertificate.setOwner(txtMachineModel.getText());
-			infoCertificate.setOwner(txtCertificateNumber.getText());
+			infoCertificate.setMachineModel(txtMachineModel.getText());
+			infoCertificate.setCertificateNumber(txtCertificateNumber.getText());
+			infoCertificate.setCalibratedDate(datePicker.getValue().toString());
+			infoCertificate.setCalibrationType(cmbCalibrationType.getValue());
+			infoCertificate.setTypeMachine(cmbMachineType.getValue());
+			infoCertificate.setSerialLength(null);
 
 			mainGUI.showColdBathPanel(this.dialogStage, infoCalibration, infoCertificate);
 
@@ -179,16 +185,15 @@ public class BasicInfoController {
 		dialogStage.close();
 	}
 
-	
 	private boolean isFormValid() {
 		String errorMessage = "";
-		
+
 		if (datePicker.getValue() == null || datePicker.getValue().toString().length() == 0) {
 			errorMessage += "Select a Date \n";
 		}
 		if (txtSerial.getText() == null || txtSerial.getText().length() == 0) {
 			errorMessage += "Set a Serial \n";
-		}else{
+		} else {
 			if (!Validations.validatedNumber(txtSerial.getText())) {
 				errorMessage += "Only a numbers in the Serial field \n";
 			}
@@ -204,19 +209,26 @@ public class BasicInfoController {
 		}
 		if (txtCertificateNumber.getText() == null || txtCertificateNumber.getText().length() == 0) {
 			errorMessage += "Set the Certificate Number \n";
-		}else{
+		} else {
 			if (!Validations.validatedNumber(txtCertificateNumber.getText())) {
 				errorMessage += "Only a numbers in the Certificate Number field \n";
 			}
 		}
 		if (txtMachineModel.getText() == null || txtMachineModel.getText().length() == 0) {
 			errorMessage += "Set the Machine Model \n";
-		}else{
+		} else {
 			if (!Validations.validatedNumber(txtCertificateNumber.getText())) {
 				errorMessage += "Only a numbers in the Machine Model \n";
 			}
 		}
-		
+
+		if (cmbCalibrationType.getValue() == null || cmbCalibrationType.getValue().length() == 0) {
+			errorMessage += "Choose the Calibration Type New or Repaired \n";
+		}
+		if (cmbMachineType.getValue() == null || cmbMachineType.getValue().length() == 0) {
+			errorMessage += "Choose the Machine Type Open, Closed or Restricted \n";
+		}
+
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
@@ -233,8 +245,8 @@ public class BasicInfoController {
 	public void setMainApp(MainGUI mainApp) {
 		this.mainGUI = mainApp;
 	}
-	
-	public void changeUpperCase(TextField txtFIeld){
+
+	public void changeUpperCase(TextField txtFIeld) {
 		txtFIeld.setText(txtFIeld.getText().toUpperCase());
 	}
 
