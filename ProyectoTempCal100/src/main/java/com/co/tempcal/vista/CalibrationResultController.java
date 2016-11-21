@@ -1,11 +1,11 @@
 package com.co.tempcal.vista;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import com.co.tempcal.controlador.MainGUI;
 import com.co.tempcal.modelo.CertificateDTO;
+import com.co.tempcal.modelo.UtilCertificate;
 import com.co.tempcal.modelo.CalibrationInformationDTO;
 
 import javafx.fxml.FXML;
@@ -129,30 +129,26 @@ public class CalibrationResultController {
 		try {	
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Save Certifcate");
-			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text", "*.pdf");
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF", "*.pdf");
 			fileChooser.getExtensionFilters().add(extFilter);
-			fileChooser.setInitialFileName("Certificate Machine" + this.infoCertificate.getMachineModel());
+			fileChooser.setInitialFileName("CertificateMachine" + this.infoCertificate.getMachineModel());
 			File certificateFile = fileChooser.showSaveDialog(this.dialogStage);
 			
 			if(certificateFile != null){
 				createCertificate(certificateFile);
 			}
-			
-			
+						
 		}catch(Exception err){
 			err.printStackTrace();
 		}
 			
 	}
 
-	private File createCertificate(File file) throws IOException {
+	private void createCertificate(File file) throws IOException {
 
-		 FileWriter fileWriter = null;
-         fileWriter = new FileWriter(file);
-         fileWriter.write("Hola Nuevo Certificado");
-         fileWriter.close();
+		UtilCertificate.createCertitificate(infoCertificate, infoCalibration, file);
+		dialogStage.close();
 		
-		return file;
 	}
 
 	

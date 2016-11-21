@@ -1,6 +1,8 @@
 package com.co.tempcal.controlador;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import com.co.tempcal.modelo.CalibrationInformationDTO;
 import com.co.tempcal.modelo.CertificateDTO;
@@ -37,8 +39,17 @@ public class MainGUI extends Application {
 		this.stgMainGUI.setTitle("TempCal100");
 		this.stgMainGUI.getIcons().add(new Image("com/co/tempcal/images/icon.png"));
 
-		initGUI();
+		URL rootFolder = MainGUI.class.getProtectionDomain().getCodeSource().getLocation();
+		File rootFile = new File(rootFolder.getPath());
 
+		File logFile = new File("log");
+		logFile.mkdirs();
+		
+		if (System.getProperty("tempcal.app.dir") == null) {
+			System.setProperty("tempcal.app.dir", logFile.getAbsolutePath());
+		}
+		
+		initGUI();
 		showMainGui();
 	}
 
@@ -133,7 +144,7 @@ public class MainGUI extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Load the information panel
 	 */
@@ -141,8 +152,7 @@ public class MainGUI extends Application {
 			CertificateDTO infoCertificate) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(
-					MainGUI.class.getClassLoader().getResource("com/co/tempcal/vista/pnlInfoFactor.fxml"));
+			loader.setLocation(MainGUI.class.getClassLoader().getResource("com/co/tempcal/vista/pnlInfoFactor.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			dialogStage.setTitle("Result Process #" + infoCalibracion.getSerial());

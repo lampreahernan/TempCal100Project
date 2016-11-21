@@ -2,8 +2,12 @@ package com.co.tempcal.vista;
 
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.co.tempcal.controlador.MainGUI;
 import com.co.tempcal.modelo.CertificateDTO;
+import com.co.tempcal.modelo.UtilCertificate;
 import com.co.tempcal.modelo.Validations;
 import com.co.tempcal.modelo.CalibrationInformationDTO;
 
@@ -19,6 +23,8 @@ import javafx.stage.Stage;
 
 public class BasicInfoController {
 
+	private static final Logger LoggerBasic = LoggerFactory.getLogger(BasicInfoController.class);
+	
 	public static final String CELSIUS = "CELSIUS";
 
 	public static final String FAHRENHEIT = "FAHRENHEIT";
@@ -119,7 +125,7 @@ public class BasicInfoController {
 	private void initialize() {
 
 		Locale.setDefault(Locale.ENGLISH);
-
+		LoggerBasic.info("Inicializando..");
 		infoCalibration = new CalibrationInformationDTO();
 		infoCertificate = new CertificateDTO();
 
@@ -170,8 +176,9 @@ public class BasicInfoController {
 			infoCertificate.setCalibratedDate(datePicker.getValue().toString());
 			infoCertificate.setCalibrationType(cmbCalibrationType.getValue());
 			infoCertificate.setTypeMachine(cmbMachineType.getValue());
-			infoCertificate.setSerialLength(null);
-
+			infoCertificate.setSerialLength(txtSerialLength.getText());
+			
+			
 			mainGUI.showColdBathPanel(this.dialogStage, infoCalibration, infoCertificate);
 
 		}
@@ -209,24 +216,19 @@ public class BasicInfoController {
 		}
 		if (txtCertificateNumber.getText() == null || txtCertificateNumber.getText().length() == 0) {
 			errorMessage += "Set the Certificate Number \n";
-		} else {
-			if (!Validations.validatedNumber(txtCertificateNumber.getText())) {
-				errorMessage += "Only a numbers in the Certificate Number field \n";
-			}
 		}
 		if (txtMachineModel.getText() == null || txtMachineModel.getText().length() == 0) {
 			errorMessage += "Set the Machine Model \n";
-		} else {
-			if (!Validations.validatedNumber(txtCertificateNumber.getText())) {
-				errorMessage += "Only a numbers in the Machine Model \n";
-			}
-		}
+		} 
 
 		if (cmbCalibrationType.getValue() == null || cmbCalibrationType.getValue().length() == 0) {
 			errorMessage += "Choose the Calibration Type New or Repaired \n";
 		}
 		if (cmbMachineType.getValue() == null || cmbMachineType.getValue().length() == 0) {
 			errorMessage += "Choose the Machine Type Open, Closed or Restricted \n";
+		}
+		if (txtSerialLength.getText() == null || txtSerialLength.getText().length() == 0) {
+			errorMessage += "Set the serial Length \n";
 		}
 
 		if (errorMessage.length() == 0) {

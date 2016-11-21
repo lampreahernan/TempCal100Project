@@ -1,9 +1,11 @@
 package com.co.tempcal.modelo;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -12,101 +14,105 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
+import org.apache.poi.xwpf.converter.pdf.PdfConverter;
+import org.apache.poi.xwpf.converter.pdf.PdfOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class UtilCertificate {
-	
-//	public final String FILE_PATH_SRC = "resources/CertificateTemplate.docx";
-//	public final String FILE_PATH_DIR = "temp/";
-//	public final String FILE_PATH_PDF = "certificates/";
-	
 
-	
-	public static void main(String[] args) {
-		
-		CertificateDTO certificate = new CertificateDTO();
-		certificate.setCalibratedDate(new Date().toString());
-		certificate.setCalibrationType("C");
-		certificate.setCertificateNumber("1111");
-		certificate.setMachineModel("2222");
-		certificate.setOwner("HERNAN");
-		certificate.setSerialLength("3333");
-		certificate.setTypeMachine("N");
-		
-		CalibrationInformationDTO calibration = new CalibrationInformationDTO();
-		calibration.setTemperatureType("C");
-		calibration.setSerial("1234");
-		
-		
-		createCertitificate(certificate, calibration);
-		
-		
-	}
-	
-	public static void createCertitificate(CertificateDTO certificate, CalibrationInformationDTO calibration){
+	private static final Logger LoggerUtil = LoggerFactory.getLogger(UtilCertificate.class);
 
-		String FILE_PATH_SRC = "C:/Users/hlamprea/Desktop/Certificate.docx";
-		String FILE_PATH_DIR = "C:/Users/hlamprea/Desktop/temp/";
-		String FILE_PATH_PDF = "C:/Users/hlamprea/Desktop/certificates/";
-		
+	public static final String FILE_PATH_SRC = new File("CertificateTemplate.docx").getAbsolutePath();
+	public static final String FILE_PATH_DIR = new File("temp").getAbsolutePath();
+	public static final String FILE_PATH_PDF = new File("certificates").getAbsolutePath();
+	//
+	// public static final String FILE_PATH_SRC =
+	// "C:/Users/Dekan/Desktop/Certificate.docx";
+	// public static final String FILE_PATH_DIR =
+	// "C:/Users/Dekan/Desktop/temp/";
+	// public static final String FILE_PATH_PDF =
+	// "C:/Users/Dekan/Desktop/certificates/";
+
+	public static void createCertitificate(CertificateDTO certificate, CalibrationInformationDTO calibration,
+			File file) {
+
+		String nombreArchivoTemp = FILE_PATH_DIR + "\\CertificateMachine" + certificate.getMachineModel() + ".docx";
 		FileInputStream fs = null;
 		XWPFDocument doc = null;
+
 		try {
+
+			createFolders();
 			fs = new FileInputStream(FILE_PATH_SRC);
 			doc = new XWPFDocument(fs);
-			
+
 			doc = replaceText(doc, certificate, calibration);
-			
-			saveWord(FILE_PATH_DIR+"Certificate"+certificate.getOwner()+".docx", doc);
-			
-			// createPDF(fileDIR, filePDF);
+
+			saveWord(nombreArchivoTemp, doc);
+
+			createPDF2(nombreArchivoTemp, file.getPath());
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LoggerUtil.error(e.toString());
 		} catch (IOException e) {
-			e.printStackTrace();
+			LoggerUtil.error(e.toString());
 		}
 
 	}
 
-	private static XWPFDocument replaceText(XWPFDocument doc, CertificateDTO certificate, CalibrationInformationDTO calibration) {
+	private static void createFolders() throws IOException {
+		File path_dir = new File(FILE_PATH_DIR);
+		path_dir.mkdirs();
+
+		File path_pdf = new File(FILE_PATH_PDF);
+		path_pdf.mkdirs();
+	}
+
+	private static XWPFDocument replaceText(XWPFDocument doc, CertificateDTO certificate,
+			CalibrationInformationDTO calibration) {
 
 		List<XWPFParagraph> listaParrafos = doc.getParagraphs();
 
-		for (Iterator iterator = listaParrafos.iterator(); iterator.hasNext();) {
+		for (Iterator<XWPFParagraph> iterator = listaParrafos.iterator(); iterator.hasNext();) {
 			XWPFParagraph xwpfParagraph = (XWPFParagraph) iterator.next();
 
 			for (XWPFRun run : xwpfParagraph.getRuns()) {
 				if (run != null) {
 					String texto = run.getText(0);
-					if (texto != null && texto.contains("$ownerName")) {
-						texto = texto.replace("$ownerName", certificate.getOwner());
-						run.setText(texto, 0);
-					}
-					if (texto != null && texto.contains("$certificateNumber")) {
-						texto = texto.replace("$certificateNumber", certificate.getCertificateNumber());
-						run.setText(texto, 0);
-					}
-					if (texto != null && texto.contains("$typeTemp")) {
-						texto = texto.replace("$typeTemp", calibration.getTemperatureType());
-						run.setText(texto, 0);
-					}
-					if (texto != null && texto.contains("$dateCalibrated")) {
-						texto = texto.replace("$dateCalibrated", certificate.getCalibratedDate());
-						run.setText(texto, 0);
-					}
-					if (texto != null && texto.contains("$modelMachine")) {
-						texto = texto.replace("$modelMachine", certificate.getMachineModel());
-						run.setText(texto, 0);
-					}
-					if (texto != null && texto.contains("$serial")) {
-						texto = texto.replace("$serial", calibration.getSerial());
-						run.setText(texto, 0);
-					}
-					if (texto != null && texto.contains("$length")) {
-						texto = texto.replace("$length", certificate.getSerialLength());
-						run.setText(texto, 0);
-					}
-					if (texto != null && texto.contains("$typeCertificate")) {
-						texto = texto.replace("$typeCertificate", certificate.getCalibrationType());
-						run.setText(texto, 0);
+					if (texto != null) {
+						if (texto.contains("ownername")) {
+							texto = texto.replace("ownername", certificate.getOwner());
+							run.setText(texto, 0);
+						}
+						if (texto.contains("certificatenumber")) {
+							texto = texto.replace("certificatenumber", certificate.getCertificateNumber() + "-"
+									+ certificate.getCalibrationType().substring(0, 1));
+							run.setText(texto, 0);
+						}
+						if (texto.contains("typetemp")) {
+							texto = texto.replace("typetemp", calibration.getTemperatureType());
+							run.setText(texto, 0);
+						}
+						if (texto.contains("datecalibrated")) {
+							texto = texto.replace("datecalibrated", certificate.getCalibratedDate());
+							run.setText(texto, 0);
+						}
+						if (texto.contains("modelmachine")) {
+							texto = texto.replace("modelmachine", certificate.getMachineModel());
+							run.setText(texto, 0);
+						}
+						if (texto.contains("serial")) {
+							texto = texto.replace("serial", calibration.getSerial());
+							run.setText(texto, 0);
+						}
+						if (texto.contains("length")) {
+							texto = texto.replace("length", certificate.getSerialLength());
+							run.setText(texto, 0);
+						}
+						if (texto.contains("typecertificate")) {
+							texto = texto.replace("typecertificate", certificate.getCalibrationType());
+							run.setText(texto, 0);
+						}
 					}
 				}
 
@@ -126,37 +132,20 @@ public class UtilCertificate {
 			out.close();
 		}
 	}
-	
-//	private void createPDF(String fileSource, String fileDir) {
-//
-//		PdfWriter writer;
-//		try {
-//			writer = new PdfWriter(fileDir);
-//			PdfDocument pdf = new PdfDocument(writer);
-//			Document document = new Document(pdf);
-//			document.close();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	private static void createPDF2(String fileSource, String fileDir) {
-//
-//		String filePath = fileSource;
-//		FileInputStream fInputStream = new FileInputStream(new File(filePath));
-//		// XWPFDocument document = new XWPFDocument(Data.class.getResourceAsStream(filePath));
-//		XWPFDocument document = new XWPFDocument(fInputStream);
-//
-//		File outFile = new File(fileDir);
-//		outFile.getParentFile().mkdirs();
-//
-//		OutputStream out = new FileOutputStream(outFile);
-//		PdfOptions options = PdfOptions.create().fontEncoding("windows-1250");
-//		PdfConverter.getInstance().convert(document, out, options);
-//
-//		System.out.println("Sucess");
-//
-//	}
-}
 
+	private static void createPDF2(String fileSource, String fileDir) throws FileNotFoundException, IOException {
+
+		String filePath = fileSource;
+		FileInputStream fInputStream = new FileInputStream(new File(filePath));
+		XWPFDocument document = new XWPFDocument(fInputStream);
+
+		File outFile = new File(fileDir);
+		outFile.getParentFile().mkdirs();
+
+		OutputStream out = new FileOutputStream(outFile);
+		PdfOptions options = PdfOptions.create();
+		PdfConverter.getInstance().convert(document, out, options);
+
+	}
+
+}
